@@ -67,30 +67,42 @@
       <!-- รูป thumbnail -->
       <div class="row q-pt-sm">
         <div class="col" style="20%">
-          <cartoon-block :data="cartoonList[0]"></cartoon-block>
+          <cartoon-block
+            :data="cartoonList[0]"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
+          ></cartoon-block>
         </div>
         <div class="col" style="20%">
           <cartoon-block
             :data="cartoonList[1]"
             v-if="cartoonList.length >= 2"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
           ></cartoon-block>
         </div>
         <div class="col" style="20%">
           <cartoon-block
             :data="cartoonList[2]"
             v-if="cartoonList.length >= 3"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
           ></cartoon-block>
         </div>
         <div class="col" style="20%">
           <cartoon-block
             :data="cartoonList[3]"
             v-if="cartoonList.length >= 4"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
           ></cartoon-block>
         </div>
         <div class="col" style="20%">
           <cartoon-block
             :data="cartoonList[4]"
             v-if="cartoonList.length >= 5"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
           ></cartoon-block>
         </div>
       </div>
@@ -99,30 +111,40 @@
           <cartoon-block
             :data="cartoonList[5]"
             v-if="cartoonList.length >= 6"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
           ></cartoon-block>
         </div>
         <div class="col" style="20%">
           <cartoon-block
             :data="cartoonList[6]"
             v-if="cartoonList.length >= 7"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
           ></cartoon-block>
         </div>
         <div class="col" style="20%">
           <cartoon-block
             :data="cartoonList[7]"
             v-if="cartoonList.length >= 8"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
           ></cartoon-block>
         </div>
         <div class="col" style="20%">
           <cartoon-block
             :data="cartoonList[8]"
             v-if="cartoonList.length >= 9"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
           ></cartoon-block>
         </div>
         <div class="col" style="20%">
           <cartoon-block
             :data="cartoonList[9]"
             v-if="cartoonList.length >= 10"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
           ></cartoon-block>
         </div>
       </div>
@@ -181,6 +203,67 @@
                   class="bluebtnmd font18"
                   label="ตกลง"
                   @click="addNewCartoonBtn()"
+                />
+              </div>
+            </div>
+          </div>
+        </q-card>
+      </q-dialog>
+      <!-- Dialog แก้ไข -->
+      <q-dialog v-model="dialogEditCartoon" persistent>
+        <q-card
+          style="max-width: 1000px;width:800px;height:350px;"
+          class="bgdialogbig"
+        >
+          <div class="bginsidebig font30 " style="line-height:105px;">
+            แก้ไขข้อมูล
+          </div>
+          <div class="bginsidebig2 font14" style="height:235px;">
+            <div class="row q-pt-lg" style="width:70%;margin:auto">
+              <div class="col-1 q-pt-sm" style="width: 120px">ชื่อเรื่อง</div>
+              <div class="col">
+                <q-input v-model="input.title" dark outlined dense rounded />
+              </div>
+            </div>
+            <div class="row q-pt-md">
+              <div style="width:15%"></div>
+              <div class="col-1 q-pt-sm" style="width: 120px">แฟ้มข้อมูล</div>
+              <div class="col">
+                <q-select
+                  v-model="input.folder"
+                  rounded
+                  dense
+                  dark
+                  outlined
+                  :options="optionFolderList"
+                />
+              </div>
+              <div style="width:15%">
+                <q-icon
+                  name="fas fa-sync"
+                  size="24px"
+                  class="q-pt-sm cursor-pointer"
+                  @click="refreshFolderListBtn()"
+                />
+              </div>
+            </div>
+            <div
+              class="row q-pl-md justify-between"
+              style="width:350px;margin:auto;"
+            >
+              <div class="q-pt-lg">
+                <q-btn
+                  class="outlineblue font18"
+                  outline
+                  label="ยกเลิก"
+                  @click="dialogEditCartoon = false"
+                />
+              </div>
+              <div class="q-pt-lg q-pr-md">
+                <q-btn
+                  class="bluebtnmd font18"
+                  label="ตกลง"
+                  @click="editCartoonBtn()"
                 />
               </div>
             </div>
@@ -287,7 +370,7 @@
       <!-- bg สีเข้ม -->
       <div
         class="fullscreen bg-backdrop"
-        v-show="dialogAddNewCartoon || dialogHowToUpload"
+        v-show="dialogAddNewCartoon || dialogHowToUpload || dialogEditCartoon"
       ></div>
     </div>
   </div>
@@ -323,10 +406,45 @@ export default {
       startCartoon: 0, //ลำดับข้อมูลการ์ตูนตัวแรกที่แสดง
       endCartoon: 0, //ลำดับข้อมูลการ์ตูนตัวสุดท้ายที่แสดง
       cartoonList: [], //ข้อมูลการ์ตูนที่แสดงในหน้านั้น
-      id1: []
+      dialogEditCartoon: false, //Dialog แก้ไขข้อมูล
+      editId: 0 //รหัส cartoon id ที่ต้องการแก้ไข
     };
   },
   methods: {
+    showSambleDia(id) {
+      console.log(id);
+    },
+    editDia(id) {
+      //เปิดหน้าต่างแก้ไขข้อมูล
+      this.dialogEditCartoon = true;
+      this.editID = id;
+      this.refreshFolderListBtn();
+      let dataShow = this.cartoonData.filter(x => x.ct_id == id);
+      this.input.title = dataShow[0].ct_title;
+      this.optionFolderList.unshift(dataShow[0].ct_folder);
+    },
+    async editCartoonBtn() {
+      // บันทึกแก้ไข;
+      //Check ว่าใส่ข้อมูลครบถ้วน
+      if (this.input.title.length == 0 || this.input.folder.length == 0) {
+        this.redNotify("กรุณาใส่ข้อมูลให้ครบถ้วน");
+        return;
+      }
+      //บันทึกข้อมูลเข้า Database
+      let ct_temp = {
+        ct_title: this.input.title,
+        ct_folder: this.input.folder,
+        ct_timestamp: new Date().getTime(),
+        ct_id: this.editID
+      };
+
+      let url = this.serverpath + "bo_cartoon_edit.php";
+      let res = await axios.post(url, JSON.stringify(ct_temp));
+      //ปิด Dialog
+      this.dialogEditCartoon = false;
+      //ทำการอัพเดท List
+      this.loadCartoon();
+    },
     async openNewCartoon() {
       //เปิดหน้าต่างเพิ่มเรื่องใหม่
       await this.loadFolderList();
@@ -385,12 +503,13 @@ export default {
       let res = await axios.post(url, JSON.stringify(ct_temp));
       this.greenNotify("บันทึกข้อมูลเสร็จสิ้น");
       this.dialogAddNewCartoon = false;
+      this.loadCartoon();
     },
     async calPage() {
       //คำนวนหาหน้าทั้งหมดที่ต้องใช้
       let url = this.serverpath + "bo_cartoon_no_data.php";
       let res = await axios.get(url);
-      this.pageMax = Math.ceil(res.data / 8);
+      this.pageMax = Math.ceil(res.data / 10);
       for (let i = 1; i <= this.pageMax; i++) {
         this.pageOptions.push(i);
       }
@@ -438,11 +557,11 @@ export default {
           (a, b) => Number(a.ct_timestamp) - Number(b.ct_timestamp)
         );
       }
-      this.cartoonData.forEach(x => {
-        console.log(x.ct_id);
-      });
+      // this.cartoonData.forEach(x => {
+      //   console.log(x.ct_id);
+      // });
 
-      console.log("--------------");
+      // console.log("--------------");
 
       //ทำการเลือกข้อมูลในหน้านั้น
       this.startCartoon = (this.page - 1) * 10 + 1;

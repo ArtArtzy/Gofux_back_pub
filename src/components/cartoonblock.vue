@@ -5,9 +5,7 @@
       <q-img :src="filepic" />
     </div>
     <div class="q-pa-sm">
-      <div class="font18">
-        {{ title }}
-      </div>
+      <div class="font18">{{ title }}</div>
       <div class="row justify-between">
         <div class="font14">ยอดวิวต่อสัปดาห์</div>
         <div class="font14">{{ viewPerWeek }}</div>
@@ -17,8 +15,10 @@
         <div class="font14">{{ viewTotal }}</div>
       </div>
       <div class="font12 row">
-        <div class="col-4"><u>แก้ไข</u></div>
-        <div class="col-4"><u>ตัวอย่าง</u></div>
+        <div class="col-4 cursor-pointer" @click="editBtn"><u>แก้ไข</u></div>
+        <div class="col-4 cursor-pointer" @click="sampleBtn">
+          <u>ตัวอย่าง</u>
+        </div>
         <div class="col-4 btgreen" v-show="status == 1" @click="onlineBtn">
           ออนไลน์
         </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   props: {
     data: Object,
@@ -42,7 +43,8 @@ export default {
       title: "",
       viewPerWeek: "",
       viewTotal: "",
-      status: 0
+      status: 0,
+      ct_id: 0
     };
   },
   methods: {
@@ -59,13 +61,32 @@ export default {
         this.viewPerWeek = this.data["statweek"];
         this.viewTotal = this.data["statview"];
         this.status = this.data["status"];
+        this.id = this.data["ct_id"];
       }, 1000);
     },
-    onlineBtn() {
-      this.status = 0;
+    sampleBtn() {
+      this.$emit("show-sample", this.id);
     },
-    offlineBtn() {
+    editBtn() {
+      this.$emit("edit-data", this.id);
+    },
+    async onlineBtn() {
+      this.status = 0;
+      let temp = {
+        status: 0
+      };
+      let url = this.serverpath + "bo_cartoon_on_off_line.php";
+      let res = await axios.post(url, JSON.stringify(temp));
+    },
+    async offlineBtn() {
       this.status = 1;
+
+      let temp = {
+        status: 1,
+        ct_id: this.id
+      };
+      let url = this.serverpath + "bo_cartoon_on_off_line.php";
+      let res = await axios.post(url, JSON.stringify(temp));
     }
   },
   watch: {
