@@ -1,0 +1,114 @@
+<template>
+  <div class="thumbnailDiv">
+    <div>
+      <!-- <img :src="require(`${filepic}`)" alt="" style="width:100%" /> -->
+      <q-img :src="filepic" />
+    </div>
+    <div class="q-pa-sm">
+      <div class="font18">
+        {{ title }}
+      </div>
+      <div class="row justify-between">
+        <div class="font14">ยอดวิวต่อสัปดาห์</div>
+        <div class="font14">{{ viewPerWeek }}</div>
+      </div>
+      <div class="row justify-between">
+        <div class="font14">ยอดวิวรวม</div>
+        <div class="font14">{{ viewTotal }}</div>
+      </div>
+      <div class="font12 row">
+        <div class="col-4"><u>แก้ไข</u></div>
+        <div class="col-4"><u>ตัวอย่าง</u></div>
+        <div class="col-4 btgreen" v-show="status == 1" @click="onlineBtn">
+          ออนไลน์
+        </div>
+        <div class="col-4 btred" v-show="status == 0" @click="offlineBtn">
+          ออฟไลน์
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    data: Object,
+    required: true
+  },
+  data() {
+    return {
+      filepic: "",
+      title: "",
+      viewPerWeek: "",
+      viewTotal: "",
+      status: 0
+    };
+  },
+  methods: {
+    loadPic() {
+      setTimeout(() => {
+        this.filepic =
+          this.serverpath +
+          "cartoon/" +
+          this.data["ct_folder"] +
+          "/00.jpg?x=" +
+          Math.floor(Math.random() * 999) +
+          100;
+        this.title = this.data["ct_title"];
+        this.viewPerWeek = this.data["statweek"];
+        this.viewTotal = this.data["statview"];
+        this.status = this.data["status"];
+      }, 1000);
+    },
+    onlineBtn() {
+      this.status = 0;
+    },
+    offlineBtn() {
+      this.status = 1;
+    }
+  },
+  watch: {
+    data: function(newData, oldData) {
+      this.title = newData["ct_title"];
+      this.filepic =
+        this.serverpath +
+        "cartoon/" +
+        newData["ct_folder"] +
+        "/00.jpg?x=" +
+        Math.floor(Math.random() * 999) +
+        100;
+      this.viewPerWeek = newData["statweek"];
+      this.viewTotal = newData["statview"];
+      this.status = newData["status"];
+    }
+  },
+  mounted() {
+    this.loadPic();
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.btgreen {
+  background-color: #9eee39;
+  color: black;
+  text-align: center;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.btred {
+  background-color: #ff2070;
+  color: black;
+  text-align: center;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.thumbnailDiv {
+  width: 90%;
+  margin: auto;
+  padding: 10px;
+  background-color: #05001e;
+  border-radius: 10px;
+}
+</style>

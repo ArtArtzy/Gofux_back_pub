@@ -1,0 +1,179 @@
+// app global css in SCSS form
+@import url("https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,500&display=swap");
+body {
+  background-color: #1c1c1c;
+  color: #ffffff;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  font-family: "Prompt", sans-serif;
+  font-size: 16px;
+  color: #cfcbd8;
+}
+.brx {
+  border: 1px solid red;
+}
+.bluebtn {
+  background-color: #4e34f0;
+  color: white;
+  width: 170px;
+  height: 65px;
+}
+.outlineblue {
+  background-color: #4e34f0;
+  color: white;
+  width: 140px;
+  height: 55px;
+}
+.bluebtnmd {
+  background-color: #4e34f0;
+  color: white;
+  width: 140px;
+  height: 55px;
+}
+.bgdialog {
+  width: 350px;
+  height: 300px;
+  // padding: 1rem;
+
+  background: linear-gradient(to right, #ff00f5, #00f0ff);
+  padding: 3px;
+  border-radius: 25px;
+}
+.bgdialogbig {
+  width: 1400px;
+  height: 440px;
+  background: linear-gradient(to right, #ff00f5, #00f0ff);
+  padding: 3px;
+  border-radius: 25px;
+}
+.bgdialogbigInput {
+  background: #1a0022;
+  color: white;
+  height: 300px;
+  border-radius: 5px 5px 0px 0px;
+  line-height: 45px;
+  text-align: center;
+}
+.bgdialogbigxl {
+  width: 1400px;
+  height: 690px;
+  background: linear-gradient(to right, #ff00f5, #00f0ff);
+  padding: 3px;
+  border-radius: 25px;
+}
+.bginside {
+  background: #1a0022;
+  color: white;
+  height: 45px;
+  border-radius: 5px 5px 0px 0px;
+  line-height: 45px;
+  text-align: center;
+}
+.bginsidebig {
+  background: #1a0022;
+  color: white;
+  height: 105px;
+  border-radius: 5px 5px 0px 0px;
+  line-height: 45px;
+  text-align: center;
+}
+
+.bginside2 {
+  margin-top: 3px;
+  background: #1a0022;
+  color: white;
+  height: 246px;
+  border-radius: 0px 0px 5px 5px;
+
+  text-align: center;
+}
+.bginsidebig2 {
+  margin-top: 3px;
+  background: #1a0022;
+  color: white;
+  height: 326px;
+  border-radius: 0px 0px 5px 5px;
+
+  text-align: center;
+}
+.bginsidebig2xl {
+  margin-top: 3px;
+  background: #1a0022;
+  color: white;
+  height: 574px;
+  border-radius: 0px 0px 5px 5px;
+
+  text-align: center;
+}
+.contentDiv {
+  width: calc(100% - 350px);
+  position: relative;
+  top: -100vh;
+  left: 340px;
+  height: 100vh;
+  overflow-y: auto;
+}
+.btncustom {
+  width: 170px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 20px 0px 0px 20px;
+  border: 1px solid #7b758b;
+}
+.btncustom:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(242, 40, 169, 1) 0%,
+    rgba(253, 106, 128, 0) 100%
+  );
+  cursor: pointer;
+  color: white;
+}
+.bg-backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.bg-strip {
+  background-color: #0b0422;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(228, 225, 225, 0.3);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ebebeb;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.font30 {
+  font-size: 30px;
+}
+.font24 {
+  font-size: 24px;
+}
+.font20 {
+  font-size: 20px;
+}
+.font18 {
+  font-size: 18px;
+}
+.font14 {
+  font-size: 14px;
+}
+.font12 {
+  font-size: 12px;
+}
