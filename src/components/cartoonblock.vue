@@ -62,7 +62,7 @@ export default {
         this.viewTotal = this.data["statview"];
         this.status = this.data["status"];
         this.id = this.data["ct_id"];
-      }, 1000);
+      }, 100);
     },
     sampleBtn() {
       this.$emit("show-sample", this.id);

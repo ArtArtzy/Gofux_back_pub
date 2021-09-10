@@ -13,8 +13,16 @@
               placeholder="ค้นหาชื่อเรื่อง"
               dense
               style="width:300px;"
-              clearable
-            />
+              @keyup.enter="searchData"
+            >
+              <template v-if="txtsearch" v-slot:append>
+                <q-icon
+                  name="cancel"
+                  @click.stop="resetSearch"
+                  class="cursor-pointer"
+                />
+              </template>
+            </q-input>
           </div>
           <div class="row">
             <div class="q-mt-sm q-mx-md">เรียง</div>
@@ -27,7 +35,7 @@
                 rounded
                 outlined
                 dense
-                @input="cartoonListShowInPage"
+                @input="changeOrder()"
               ></q-select>
             </div>
           </div>
@@ -42,7 +50,7 @@
                 rounded
                 outlined
                 dense
-                @input="cartoonListShowInPage"
+                @input="changePage()"
               ></q-select>
             </div>
           </div>
@@ -367,6 +375,50 @@
           </div>
         </q-card>
       </q-dialog>
+      <!-- Dialog ตัวอย่าง -->
+      <q-dialog v-model="dialogSample" persistent>
+        <q-card
+          style="max-width: 1000px;width:800px;height:650px;"
+          class="bgdialogbig"
+        >
+          <div class="bginsidebig font18 " style="line-height:50px;">
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-10" align="center">ตัวอย่างการแสดงผล</div>
+              <div
+                class="col-1 cursor-pointer font24"
+                @click="dialogSample = false"
+              >
+                x
+              </div>
+            </div>
+
+            <div class="row font24 justify-center">
+              <div>{{ titleSample }}</div>
+            </div>
+          </div>
+          <div
+            class="bginsidebig2 font14"
+            style="height:535px; overflow-y:scroll"
+          >
+            <div v-for="index in pageSample" :key="index">
+              {{ index }}
+              <img
+                :src="pathSample + '0' + index + '.jpg'"
+                alt=""
+                style="width:80%"
+                v-if="index <= 9"
+              />
+              <img
+                :src="pathSample + index + '.jpg'"
+                alt=""
+                style="width:80%"
+                v-if="index > 9"
+              />
+            </div>
+          </div>
+        </q-card>
+      </q-dialog>
       <!-- bg สีเข้ม -->
       <div
         class="fullscreen bg-backdrop"
@@ -407,12 +459,114 @@ export default {
       endCartoon: 0, //ลำดับข้อมูลการ์ตูนตัวสุดท้ายที่แสดง
       cartoonList: [], //ข้อมูลการ์ตูนที่แสดงในหน้านั้น
       dialogEditCartoon: false, //Dialog แก้ไขข้อมูล
-      editId: 0 //รหัส cartoon id ที่ต้องการแก้ไข
+      editId: 0, //รหัส cartoon id ที่ต้องการแก้ไข
+      dialogSample: false, //Dialog ตัวอย่างการ์ตูน
+      titleSample: "", //ชื่อเรื่องในหน้าตัวอย่าง
+      pageSample: 0, //จำนวนหน้าที่มีในเรื่องนั้น
+      pathSample: "", //ที่อยู่ของไฟล์ตัวอย่าง
+      cartoonSearch: [] //ข้อมูลที่ได้จากการค้นหา
     };
   },
   methods: {
-    showSambleDia(id) {
-      console.log(id);
+    changeOrder() {
+      //เปลี่ยนการเรียง
+      if (this.txtsearch == "") {
+        this.cartoonListShowInPage;
+      } else {
+        //ทำการเลือกข้อมูลในหน้านั้น
+        this.cartoonList = [];
+        if (this.sortOrder == "ยอดวิวรวม") {
+          this.cartoonSearch.sort(
+            (a, b) => Number(b.statview) - Number(a.statview)
+          );
+        } else if (this.sortOrder == "ยอดวิวต่อสัปดาห์") {
+          this.cartoonSearch.sort((a, b) => {
+            return Number(b.statweek) - Number(a.statweek);
+          });
+        } else {
+          this.cartoonSearch.sort(
+            (a, b) => Number(a.ct_timestamp) - Number(b.ct_timestamp)
+          );
+        }
+        this.startCartoon = (this.page - 1) * 10 + 1;
+        this.endCartoon = this.page * 10;
+        if (this.cartoonSearch.length < this.endCartoon) {
+          this.endCartoon = this.cartoonSearch.length;
+        }
+        for (let i = this.startCartoon - 1; i < this.endCartoon; i++) {
+          this.cartoonList.push(this.cartoonSearch[i]);
+        }
+      }
+    },
+    changePage() {
+      //เปลี่ยนหน้า
+      if (this.txtsearch == "") {
+        this.cartoonListShowInPage;
+      } else {
+        //ทำการเลือกข้อมูลในหน้านั้น
+        this.cartoonList = [];
+        if (this.sortOrder == "ยอดวิวรวม") {
+          this.cartoonSearch.sort(
+            (a, b) => Number(b.statview) - Number(a.statview)
+          );
+        } else if (this.sortOrder == "ยอดวิวต่อสัปดาห์") {
+          this.cartoonSearch.sort((a, b) => {
+            return Number(b.statweek) - Number(a.statweek);
+          });
+        } else {
+          this.cartoonSearch.sort(
+            (a, b) => Number(a.ct_timestamp) - Number(b.ct_timestamp)
+          );
+        }
+        this.startCartoon = (this.page - 1) * 10 + 1;
+        this.endCartoon = this.page * 10;
+        if (this.cartoonSearch.length < this.endCartoon) {
+          this.endCartoon = this.cartoonSearch.length;
+        }
+        for (let i = this.startCartoon - 1; i < this.endCartoon; i++) {
+          this.cartoonList.push(this.cartoonSearch[i]);
+        }
+      }
+    },
+    resetSearch() {
+      //ยกเลิกการค้นหา
+      this.txtsearch = "";
+      this.calPage();
+      this.page = 1;
+      this.sortOrder = "ยอดวิวรวม";
+      this.cartoonListShowInPage();
+    },
+    searchData() {
+      //เมื่อกดปุ่มค้นหา
+      this.page = 1;
+      this.sortOrder = "ยอดวิวรวม";
+      this.cartoonSearch = [];
+      this.cartoonData.forEach(x => {
+        if (x.ct_title.indexOf(this.txtsearch) != -1) {
+          this.cartoonSearch.push(x);
+        }
+      });
+      //ทำการหาจำนวนหน้าที่มีใหม่
+      let pageFilter = Math.ceil(this.cartoonSearch.length / 10);
+      this.pageOptions = [];
+      for (let i = 1; i <= pageFilter; i++) {
+        this.pageOptions.push(i);
+      }
+      this.changePage();
+    },
+    async showSambleDia(id) {
+      //แสดงหน้าตัวอย่างการ์ตูน
+      this.dialogSample = true;
+      let showResult = this.cartoonData.filter(x => x.ct_id == id);
+      this.titleSample = showResult[0].ct_title;
+      let temp = {
+        ct_folder: showResult[0].ct_folder
+      };
+      let url = this.serverpath + "bo_cartoon_show_last_file.php";
+      let res = await axios.post(url, JSON.stringify(temp));
+      this.pageSample = res.data;
+      this.pathSample =
+        this.serverpath + "cartoon/" + showResult[0].ct_folder + "/";
     },
     editDia(id) {
       //เปิดหน้าต่างแก้ไขข้อมูล
@@ -503,10 +657,12 @@ export default {
       let res = await axios.post(url, JSON.stringify(ct_temp));
       this.greenNotify("บันทึกข้อมูลเสร็จสิ้น");
       this.dialogAddNewCartoon = false;
+      this.calPage();
       this.loadCartoon();
     },
     async calPage() {
       //คำนวนหาหน้าทั้งหมดที่ต้องใช้
+      this.pageOptions = [];
       let url = this.serverpath + "bo_cartoon_no_data.php";
       let res = await axios.get(url);
       this.pageMax = Math.ceil(res.data / 10);
@@ -557,11 +713,6 @@ export default {
           (a, b) => Number(a.ct_timestamp) - Number(b.ct_timestamp)
         );
       }
-      // this.cartoonData.forEach(x => {
-      //   console.log(x.ct_id);
-      // });
-
-      // console.log("--------------");
 
       //ทำการเลือกข้อมูลในหน้านั้น
       this.startCartoon = (this.page - 1) * 10 + 1;
