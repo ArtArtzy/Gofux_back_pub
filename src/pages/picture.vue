@@ -187,18 +187,35 @@
           </div>
           <div class="bginsidebig2 font14" style="height:435px;">
             <div class="row q-pt-lg" style="width:70%;margin:auto">
-              <div class="col-1 q-pt-sm" style="width: 120px">ชื่อเรื่อง</div>
+              <div class="col-1 q-pt-sm" style="width: 120px">ชื่อวาร์ป</div>
               <div class="col">
                 <q-input v-model="input.title" dark outlined dense rounded />
               </div>
             </div>
-            <div class="row q-pt-lg" style="width:70%;margin:auto">
+            <div class="row q-pt-md" style="width:70%;margin:auto">
+              <div class="col-1 q-pt-sm" style="width: 120px">ประเภท</div>
+              <div class="col">
+                <div class="col">
+                  <q-select
+                    v-model="input.type"
+                    rounded
+                    dense
+                    dark
+                    outlined
+                    :options="optionGroupList"
+                    emit-value
+                    map-options
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row q-pt-md" style="width:70%;margin:auto">
               <div class="col-1 q-pt-sm" style="width: 120px">Instragram</div>
               <div class="col">
                 <q-input v-model="input.ig" dark outlined dense rounded />
               </div>
             </div>
-            <div class="row q-pt-lg" style="width:70%;margin:auto">
+            <div class="row q-pt-md" style="width:70%;margin:auto">
               <div class="col-1 q-pt-sm" style="width: 120px">Facebook</div>
               <div class="col">
                 <q-input v-model="input.facebook" dark outlined dense rounded />
@@ -226,7 +243,7 @@
                 />
               </div>
             </div>
-            <div class="row q-pt-lg" style="width:70%;margin:auto">
+            <div class="row q-pt-md" style="width:70%;margin:auto">
               <div class="col-1 q-pt-sm" style="width: 120px">การเข้าถึง</div>
               <div class="col" align="left">
                 <q-option-group
@@ -242,7 +259,7 @@
               class="row q-pl-md justify-between"
               style="width:350px;margin:auto;"
             >
-              <div class="q-pt-lg">
+              <div class="q-pt-md">
                 <q-btn
                   class="outlineblue font18"
                   outline
@@ -250,7 +267,7 @@
                   @click="dialogAddNewPicture = false"
                 />
               </div>
-              <div class="q-pt-lg q-pr-md">
+              <div class="q-pt-md q-pr-md">
                 <q-btn
                   class="bluebtnmd font18"
                   label="ตกลง"
@@ -336,13 +353,21 @@
                 >
                   <u>ลบ</u>
                 </div>
-                <div class="col-1" style="width:100px"><u>แก้ไข</u></div>
+                <div
+                  class="col-1 cursor-pointer"
+                  style="width:100px"
+                  @click="
+                    editGroupBtn(item.pm_id, item.pm_title, item.pm_order)
+                  "
+                >
+                  <u>แก้ไข</u>
+                </div>
               </div>
             </div>
           </div>
         </q-card>
       </q-dialog>
-      <!-- Dialog confirm delete -->
+      <!-- Dialog confirm delete ประเภท -->
       <q-dialog
         v-model="dialogConfirmDel"
         persistent
@@ -380,6 +405,66 @@
           </div>
         </div>
       </q-dialog>
+      <!-- Dialog แก้ไขประเภท -->
+      <q-dialog
+        v-model="dialogConfirmEdit"
+        persistent
+        transition-show="scale"
+        transition-hide="scale"
+      >
+        <div class="bgdialog" style="width:400px;">
+          <div class="bginside font18">
+            แก้ไขประเภท
+          </div>
+          <div class="bginside2 font14 q-pt-md">
+            <div class="row q-pa-md">
+              <div class="col-1 q-pt-sm" align="left" style="width:100px">
+                ลำดับ
+              </div>
+              <div class="col ">
+                <q-input
+                  v-model="editGroup.orderdata"
+                  dark
+                  outlined
+                  dense
+                  rounded
+                />
+              </div>
+            </div>
+            <div class="row q-px-md">
+              <div class="col-1 q-pt-sm" align="left" style="width:100px">
+                ชื่อประเภท
+              </div>
+              <div class="col">
+                <q-input
+                  v-model="editGroup.title"
+                  dark
+                  outlined
+                  dense
+                  rounded
+                />
+              </div>
+            </div>
+            <div class="row q-px-md justify-between">
+              <div class="q-pt-lg q-pl-lg">
+                <q-btn
+                  class="outlineblue font18"
+                  outline
+                  label="ยกเลิก"
+                  @click="dialogConfirmEdit = false"
+                />
+              </div>
+              <div class="q-pt-lg q-pr-lg">
+                <q-btn
+                  class="bluebtnmd font18"
+                  label="ตกลง"
+                  @click="editGroupReal"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-dialog>
       <!-- bg สีเข้ม -->
       <div
         class="fullscreen bg-backdrop"
@@ -387,7 +472,8 @@
           dialogHowToUpload ||
             dialogAddNewPicture ||
             dialogSetGroup ||
-            dialogConfirmDel
+            dialogConfirmDel ||
+            dialogConfirmEdit
         "
       ></div>
     </div>
@@ -410,8 +496,9 @@ export default {
       dialogAddNewPicture: false, //หน้าต่างเพิ่มวาร์ปใหม่
       input: {
         title: "",
+        type: "",
         folder: "",
-        access: "public",
+        access: "ทั่วไป",
         ig: "",
         facebook: ""
       }, //ข้อมูลการเพิ่มวาร์ปใหม่
@@ -436,10 +523,41 @@ export default {
       delGroupInput: {
         id: "",
         title: ""
-      } //ข้อมูลที่ใช้ลบกลุ่ม
+      }, //ข้อมูลที่ใช้ลบกลุ่ม
+      dialogConfirmEdit: false, //หน้าต่าง Edit การแก้ไข
+      editGroup: {
+        id: "",
+        orderdata: "",
+        title: ""
+      }, //ข้อมูลในหน้าต่างแก้ไข
+      optionGroupList: [] //รายชื่อ ประเภทเรียงตาม order
     };
   },
   methods: {
+    addNewPictureBtn() {
+      //เพิ่มวาร์ปชุดใหม่
+    },
+    editGroupBtn(id, title, orderdata) {
+      //กดแก้ไขจาก List ประเภท
+      this.editGroup.id = id;
+      this.editGroup.orderdata = orderdata;
+      this.editGroup.title = title;
+      this.dialogConfirmEdit = true;
+    },
+    async editGroupReal() {
+      //บันทึกการแก้ไขประเภท
+      let temp = {
+        pm_id: this.editGroup.id,
+        pm_order: this.editGroup.orderdata,
+        pm_title: this.editGroup.title,
+        timestamp: new Date().getTime()
+      };
+      let url = this.serverpath + "bo_picture_edit_group.php";
+      let res = await axios.post(url, JSON.stringify(temp));
+      this.greenNotify("บันทึกข้อมูลเสร็จสิ้น");
+      this.dialogConfirmEdit = false;
+      this.loadGroupList();
+    },
     openGroupDialog() {
       //เปิดหน้าต่างจัดประเภท
       this.dialogSetGroup = true;
@@ -470,15 +588,22 @@ export default {
     },
     async loadGroupList() {
       this.groupList = [];
+      this.optionGroupList = [];
       let url = this.serverpath + "bo_picture_load_group.php";
       let res = await axios.get(url);
       res.data.forEach(x => {
         this.groupList.push(x);
+        let tempx = {
+          label: x.pm_title,
+          value: x.pm_id
+        };
+        this.optionGroupList.push(tempx);
       });
+      this.input.type = this.optionGroupList[0].value;
     },
     delGroup(id, title) {
       //กดลบกลุ่ม
-      console.log(id, title);
+
       //เก็บค่า id,title
       this.delGroupInput.id = id;
       this.delGroupInput.title = title;
@@ -489,14 +614,27 @@ export default {
       this.dialogConfirmDel = true;
       // }, 1000);
     },
-    delGroupReal() {
+    async delGroupReal() {
       //ลบกลุ่มออกจริงๆ
+      let temp = {
+        id: this.delGroupInput.id
+      };
+      let url = this.serverpath + "bo_picture_del_group.php";
+      let res = await axios.post(url, JSON.stringify(temp));
+      if (res.data == "finish") {
+        this.greenNotify("ลบข้อมูลเสร็จสิ้น");
+        this.loadGroupList();
+      } else {
+        this.redNotify("ลบไม่ได้ มีวาร์ปอยู่ในประเภทนี้");
+      }
+      this.dialogConfirmDel = false;
     },
     changeOrder() {},
     changePage() {},
     async openNewPicture() {
       //เปิดหน้าต่างเพิ่มเรื่องใหม่
       await this.loadFolderList();
+      await this.loadGroupList();
       this.dialogAddNewPicture = true;
       this.input.title = "";
     },

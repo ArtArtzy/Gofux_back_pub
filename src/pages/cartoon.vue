@@ -500,8 +500,9 @@ export default {
     },
     changePage() {
       //เปลี่ยนหน้า
-      if (this.txtsearch == "") {
-        this.cartoonListShowInPage;
+
+      if (this.txtsearch.trim().length == 0) {
+        this.cartoonListShowInPage();
       } else {
         //ทำการเลือกข้อมูลในหน้านั้น
         this.cartoonList = [];
@@ -720,6 +721,7 @@ export default {
       if (this.cartoonData.length < this.endCartoon) {
         this.endCartoon = this.cartoonData.length;
       }
+
       for (let i = this.startCartoon - 1; i < this.endCartoon; i++) {
         this.cartoonList.push(this.cartoonData[i]);
       }
