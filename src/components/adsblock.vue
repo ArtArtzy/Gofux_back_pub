@@ -1,11 +1,14 @@
 <template>
-  <div class="thumbnailDiv">
-    รูปโฆษณา
-  </div>
+  <div class="thumbnailDiv">รูปโฆษณา {{ data }}</div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    data: Object,
+    required: true
+  }
+};
 </script>
 
 <style lang="scss" scoped>

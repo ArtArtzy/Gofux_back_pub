@@ -18,8 +18,8 @@
           </div>
         </div>
       </div>
-      <div class="q-pt-md">
-        <ads-block></ads-block>
+      <div class="q-pt-md" v-for="index in adsData.length" :key="index">
+        <ads-block :data="adsData[index - 1]"></ads-block>
       </div>
     </div>
     <!-- Dialog เพิ่ม ads ใหม่ -->
