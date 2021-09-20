@@ -79,13 +79,152 @@
           <div style="width: 15px;"></div>
         </div>
       </div>
+      <!-- รูป thumbnail -->
+      <div class="row q-pt-sm">
+        <div class="col" style="20%">
+          <picture-block
+            :data="pictureList[0]"
+            v-if="pictureList.length >= 1"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
+          ></picture-block>
+        </div>
+        <div class="col" style="20%">
+          <picture-block
+            :data="pictureList[1]"
+            v-if="pictureList.length >= 2"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
+          ></picture-block>
+        </div>
+        <div class="col" style="20%">
+          <picture-block
+            :data="pictureList[2]"
+            v-if="pictureList.length >= 3"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
+          ></picture-block>
+        </div>
+        <div class="col" style="20%">
+          <picture-block
+            :data="pictureList[3]"
+            v-if="pictureList.length >= 4"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
+          ></picture-block>
+        </div>
+        <div class="col" style="20%">
+          <picture-block
+            :data="pictureList[4]"
+            v-if="pictureList.length >= 5"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
+          ></picture-block>
+        </div>
+      </div>
+      <div class="row q-pt-sm">
+        <div class="col" style="20%">
+          <picture-block
+            :data="pictureList[5]"
+            v-if="pictureList.length >= 6"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
+          ></picture-block>
+        </div>
+        <div class="col" style="20%">
+          <picture-block
+            :data="pictureList[6]"
+            v-if="pictureList.length >= 7"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
+          ></picture-block>
+        </div>
+        <div class="col" style="20%">
+          <picture-block
+            :data="pictureList[7]"
+            v-if="pictureList.length >= 8"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
+          ></picture-block>
+        </div>
+        <div class="col" style="20%">
+          <picture-block
+            :data="pictureList[8]"
+            v-if="pictureList.length >= 9"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
+          ></picture-block>
+        </div>
+        <div class="col" style="20%">
+          <picture-block
+            :data="pictureList[9]"
+            v-if="pictureList.length >= 10"
+            @show-sample="showSambleDia"
+            @edit-data="editDia"
+          ></picture-block>
+        </div>
+      </div>
+      <!-- Dialog ตัวอย่าง -->
+      <q-dialog v-model="dialogSample" persistent>
+        <q-card
+          style="max-width: 1000px;width:800px;height:650px;"
+          class="bgdialogbig"
+        >
+          <div class="bginsidebig font18 " style="line-height:50px;">
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-10" align="center">ตัวอย่างการแสดงผล</div>
+              <div
+                class="col-1 cursor-pointer font24"
+                @click="dialogSample = false"
+              >
+                x
+              </div>
+            </div>
+
+            <div class="row font24 justify-center">
+              <div>{{ titleSample }}</div>
+            </div>
+          </div>
+          <div
+            class="bginsidebig2 font14"
+            style="height:535px; overflow-y:scroll"
+          >
+            <div v-for="index in pageSample" :key="index">
+              <img
+                :src="
+                  pathSample +
+                    '0' +
+                    index +
+                    '.jpg?x=' +
+                    (Math.floor(Math.random() * 999) + 100)
+                "
+                alt=""
+                style="width:60%"
+                v-if="index <= 9"
+              />
+              <img
+                :src="
+                  pathSample +
+                    index +
+                    '.jpg?x=' +
+                    (Math.floor(Math.random() * 999) + 100)
+                "
+                alt=""
+                style="width:60%"
+                v-if="index > 9"
+              />
+            </div>
+          </div>
+        </q-card>
+      </q-dialog>
       <!-- Dialog วิธีการอัพโหลด -->
       <q-dialog v-model="dialogHowToUpload" persistent>
         <q-card
           style="max-width: 1000px;width:800px;height:450px;"
           class="bgdialogbig"
         >
-          <div class="bginsidebig font24 " style="line-height:50px;">
+          <div class="bginsidebig font24 " style="line-height:100px;">
             <div class="row">
               <div class="col-1"></div>
               <div class="col-10" align="center">วิธีการอัพโหลด</div>
@@ -96,33 +235,9 @@
                 x
               </div>
             </div>
-
-            <div class="row font14 justify-center">
-              <div
-                class="unselectedBtn q-mx-md"
-                v-show="!uploadWindows"
-                @click="showUploadWindows"
-              >
-                Windows
-              </div>
-              <div class="selectedBtn q-mx-md" v-show="uploadWindows">
-                Windows
-              </div>
-              <div
-                class="unselectedBtn q-mx-md"
-                v-show="uploadWindows"
-                @click="showUploadMacs"
-              >
-                MacOS
-              </div>
-              <div class="selectedBtn q-mx-md" v-show="!uploadWindows">
-                MacOS
-              </div>
-            </div>
           </div>
           <div class="bginsidebig2 font14" style="height:335px;">
             <div
-              v-show="uploadWindows"
               align="left"
               class="q-pa-md"
               style="height:335px; overflow:auto;"
@@ -165,27 +280,19 @@
                 ไฟล์ตัวหนังสือการ์ตูนจะเริ่มจากไฟล์ 01.jpg โดยการรันเลขไปเรื่อยๆ
               </div>
             </div>
-            <div
-              v-show="!uploadWindows"
-              align="left"
-              class="q-pa-md"
-              style="height:335px; overflow:auto;"
-            >
-              ไปหาวิธีทำก่อนนะ!!!
-            </div>
           </div>
         </q-card>
       </q-dialog>
       <!-- Dialog เพิ่มเรื่องใหม่ -->
       <q-dialog v-model="dialogAddNewPicture" persistent>
         <q-card
-          style="max-width: 1000px;width:800px;height:550px;"
+          style="max-width: 1000px;width:800px;height:450px;"
           class="bgdialogbig"
         >
           <div class="bginsidebig font30 " style="line-height:105px;">
             เพิ่มวาร์ปชุดใหม่
           </div>
-          <div class="bginsidebig2 font14" style="height:435px;">
+          <div class="bginsidebig2 font14" style="height:335px;">
             <div class="row q-pt-lg" style="width:70%;margin:auto">
               <div class="col-1 q-pt-sm" style="width: 120px">ชื่อวาร์ป</div>
               <div class="col">
@@ -207,18 +314,6 @@
                     map-options
                   />
                 </div>
-              </div>
-            </div>
-            <div class="row q-pt-md" style="width:70%;margin:auto">
-              <div class="col-1 q-pt-sm" style="width: 120px">Instragram</div>
-              <div class="col">
-                <q-input v-model="input.ig" dark outlined dense rounded />
-              </div>
-            </div>
-            <div class="row q-pt-md" style="width:70%;margin:auto">
-              <div class="col-1 q-pt-sm" style="width: 120px">Facebook</div>
-              <div class="col">
-                <q-input v-model="input.facebook" dark outlined dense rounded />
               </div>
             </div>
             <div class="row q-pt-md">
@@ -249,7 +344,7 @@
                 <q-option-group
                   v-model="input.access"
                   :options="optionAccess"
-                  color="primary"
+                  color="white"
                   inline
                   dark
                 />
@@ -272,6 +367,104 @@
                   class="bluebtnmd font18"
                   label="ตกลง"
                   @click="addNewPictureBtn()"
+                />
+              </div>
+            </div>
+          </div>
+        </q-card>
+      </q-dialog>
+      <!-- Dialog แก้ไขเรื่อง -->
+      <q-dialog v-model="dialogEditPicture" persistent>
+        <q-card
+          style="max-width: 1000px;width:800px;height:450px;"
+          class="bgdialogbig"
+        >
+          <div class="bginsidebig font30 row" style="line-height:105px;">
+            <div class="col-2"></div>
+            <div class="col-8" align="center">แก้ไขวาร์ป</div>
+            <div class="col-2">
+              <q-icon
+                name="fas fa-trash-alt"
+                class="cursor-pointer"
+                @click="delPicture()"
+              />
+            </div>
+          </div>
+          <div class="bginsidebig2 font14" style="height:335px;">
+            <div class="row q-pt-lg" style="width:70%;margin:auto">
+              <div class="col-1 q-pt-sm" style="width: 120px">ชื่อวาร์ป</div>
+              <div class="col">
+                <q-input v-model="input.title" dark outlined dense rounded />
+              </div>
+            </div>
+            <div class="row q-pt-md" style="width:70%;margin:auto">
+              <div class="col-1 q-pt-sm" style="width: 120px">ประเภท</div>
+              <div class="col">
+                <div class="col">
+                  <q-select
+                    v-model="input.type"
+                    rounded
+                    dense
+                    dark
+                    outlined
+                    :options="optionGroupList"
+                    emit-value
+                    map-options
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row q-pt-md">
+              <div style="width:15%"></div>
+              <div class="col-1 q-pt-sm" style="width: 120px">แฟ้มข้อมูล</div>
+              <div class="col">
+                <q-select
+                  v-model="input.folder"
+                  rounded
+                  dense
+                  dark
+                  outlined
+                  :options="optionFolderList"
+                />
+              </div>
+              <div style="width:15%">
+                <q-icon
+                  name="fas fa-sync"
+                  size="24px"
+                  class="q-pt-sm cursor-pointer"
+                  @click="refreshFolderListBtn()"
+                />
+              </div>
+            </div>
+            <div class="row q-pt-md" style="width:70%;margin:auto">
+              <div class="col-1 q-pt-sm" style="width: 120px">การเข้าถึง</div>
+              <div class="col" align="left">
+                <q-option-group
+                  v-model="input.access"
+                  :options="optionAccess"
+                  color="white"
+                  inline
+                  dark
+                />
+              </div>
+            </div>
+            <div
+              class="row q-pl-md justify-between"
+              style="width:350px;margin:auto;"
+            >
+              <div class="q-pt-md">
+                <q-btn
+                  class="outlineblue font18"
+                  outline
+                  label="ยกเลิก"
+                  @click="dialogEditPicture = false"
+                />
+              </div>
+              <div class="q-pt-md q-pr-md">
+                <q-btn
+                  class="bluebtnmd font18"
+                  label="ตกลง"
+                  @click="editPictureBtn()"
                 />
               </div>
             </div>
@@ -413,8 +606,10 @@
         transition-hide="scale"
       >
         <div class="bgdialog" style="width:400px;">
-          <div class="bginside font18">
-            แก้ไขประเภท
+          <div class="bginside font18 row">
+            <div class="col-2"></div>
+            <div class="col-8" align="center">แก้ไขประเภท</div>
+            <div class="col-2"></div>
           </div>
           <div class="bginside2 font14 q-pt-md">
             <div class="row q-pa-md">
@@ -482,12 +677,17 @@
 
 <script>
 import axios from "axios";
+import pictureBlock from "../components/pictureblock";
 export default {
+  components: {
+    pictureBlock
+  },
   data() {
     return {
       txtsearch: "", //ข้อความค้นหา
       sortOrder: "ยอดวิวรวม", //เรียงลำดับ
       options: ["ยอดวิวรวม", "ยอดวิวต่อสัปดาห์", "ลำดับการอัพโหลด"], //ตัวเลือกในการเรียงลำดับ
+      currentPage: 1, //หน้าปัจจุบัน
       page: 1, //หน้า
       pageMax: 1, //จำนวนหน้าสูงสุด
       pageOptions: [], //ตัวเลือกของหน้า
@@ -498,9 +698,7 @@ export default {
         title: "",
         type: "",
         folder: "",
-        access: "ทั่วไป",
-        ig: "",
-        facebook: ""
+        access: "ทั่วไป"
       }, //ข้อมูลการเพิ่มวาร์ปใหม่
       optionAccess: [
         {
@@ -530,12 +728,117 @@ export default {
         orderdata: "",
         title: ""
       }, //ข้อมูลในหน้าต่างแก้ไข
-      optionGroupList: [] //รายชื่อ ประเภทเรียงตาม order
+      optionGroupList: [], //รายชื่อ ประเภทเรียงตาม order
+      pictureData: [], //ข้อมูลรูป
+      pictureList: [], //ข้อมูลที่โชว์บนหน้าจอ
+      startPicture: 0, //รูปแรกที่โชว์
+      endPicture: 0, //รูปสุดท้ายที่โชว์
+      dialogSample: false, //หน้าต่างตัวอย่าง
+      titleSample: "", //หัวข้อในหน้าตัวอย่าง
+      pathSample: "", //ตำแหน่งของไฟล์
+      pageSample: 0, //จำนวนหน้าที่มีในเรื่องนั้น
+      dialogEditPicture: false, //หน้าต่างแก้ไข
+      editID: 0, //รหัสแก้ไข
+      pictureSearch: [] //ข้อมูลที่ได้จากการค้นหา
     };
   },
   methods: {
-    addNewPictureBtn() {
+    async calPage() {
+      //คำนวนหาหน้าทั้งหมดที่ต้องใช้
+      this.pageOptions = [];
+      let url = this.serverpath + "bo_picture_no_data.php";
+      let res = await axios.get(url);
+      this.pageMax = Math.ceil(res.data / 10);
+      for (let i = 1; i <= this.pageMax; i++) {
+        this.pageOptions.push(i);
+      }
+      this.page = this.currentPage;
+    },
+    async delPicture() {
+      //ลบวาร์ป
+      let temp = {
+        id: this.editID
+      };
+      let url = this.serverpath + "bo_picture_del_picture.php";
+      let res = await axios.post(url, JSON.stringify(temp));
+      this.greenNotify("ลบข้อมูลเสร็จสิ้น");
+      this.loadPictureList();
+      this.dialogEditPicture = false;
+    },
+    async editDia(id) {
+      //เปิดหน้าต่างแก้ไขข้อมูล
+      await this.loadFolderList();
+      await this.loadGroupList();
+      this.dialogEditPicture = true;
+      this.editID = id;
+      this.refreshFolderListBtn();
+      let dataShow = this.pictureData.filter(x => x.pt_id == id);
+      this.input.title = dataShow[0].pt_title;
+      this.input.type = dataShow[0].pt_mode_id;
+      this.input.access = dataShow[0].pt_access;
+      this.optionFolderList.unshift(dataShow[0].pt_folder);
+    },
+    async showSambleDia(id) {
+      //แสดงหน้าตัวอย่างวาร์ป
+      this.dialogSample = true;
+      let showResult = this.pictureData.filter(x => x.pt_id == id);
+      this.titleSample = showResult[0].pt_title;
+      let temp = {
+        pt_folder: showResult[0].pt_folder
+      };
+      let url = this.serverpath + "bo_picture_show_last_file.php";
+      let res = await axios.post(url, JSON.stringify(temp));
+      this.pageSample = Number(res.data);
+      this.pathSample =
+        this.serverpath + "picture/" + showResult[0].pt_folder + "/";
+    },
+    async addNewPictureBtn() {
       //เพิ่มวาร์ปชุดใหม่
+      if (this.input.title.length == 0) {
+        this.redNotify("กรุณาใส่ชื่อวาร์ป");
+        return;
+      }
+
+      let temp = {
+        pt_title: this.input.title,
+        pt_mode_id: this.input.type,
+        pt_folder: this.input.folder,
+        pt_access: this.input.access,
+        timestamp: new Date().getTime()
+      };
+      let url = this.serverpath + "bo_picture_add_picture.php";
+      let res = await axios.post(url, JSON.stringify(temp));
+      this.greenNotify("บันทึกข้อมูลเสร็จสิ้น");
+      this.calPage();
+      await this.loadPictureList();
+      await this.pictureListShowInPage();
+      this.dialogAddNewPicture = false;
+    },
+    async editPictureBtn() {
+      // บันทึกแก้ไข;
+      //Check ว่าใส่ข้อมูลครบถ้วน
+      if (this.input.title.length == 0 || this.input.folder.length == 0) {
+        this.redNotify("กรุณาใส่ข้อมูลให้ครบถ้วน");
+        return;
+      }
+      //บันทึกข้อมูลเข้า Database
+      let pt_temp = {
+        pt_title: this.input.title,
+        pt_folder: this.input.folder,
+        pt_mode_id: this.input.type,
+        pt_access: this.input.access,
+        pt_timestamp: new Date().getTime(),
+        pt_id: this.editID
+      };
+
+      let url = this.serverpath + "bo_picture_edit.php";
+      let res = await axios.post(url, JSON.stringify(pt_temp));
+      //ปิด Dialog
+      this.dialogEditPicture = false;
+      //ทำการอัพเดท List
+      await this.loadPictureList();
+      await this.pictureListShowInPage();
+      window.location.reload();
     },
     editGroupBtn(id, title, orderdata) {
       //กดแก้ไขจาก List ประเภท
@@ -557,6 +860,18 @@ export default {
       this.greenNotify("บันทึกข้อมูลเสร็จสิ้น");
       this.dialogConfirmEdit = false;
       this.loadGroupList();
+    },
+    refreshFolderListBtn() {
+      this.showLoading();
+      this.loadFolderList();
+    },
+    showLoading() {
+      this.$q.loading.show();
+      // hiding in 0.5s
+      this.timer = setTimeout(() => {
+        this.$q.loading.hide();
+        this.timer = void 0;
+      }, 500);
     },
     openGroupDialog() {
       //เปิดหน้าต่างจัดประเภท
@@ -629,8 +944,94 @@ export default {
       }
       this.dialogConfirmDel = false;
     },
-    changeOrder() {},
-    changePage() {},
+    changeOrder() {
+      //เปลี่ยนการเรียง
+      console.log("change order");
+      if (this.txtsearch == "") {
+        this.pictureListShowInPage();
+      } else {
+        //ทำการเลือกข้อมูลในหน้านั้น
+        this.pictureList = [];
+        if (this.sortOrder == "ยอดวิวรวม") {
+          this.pictureSearch.sort(
+            (a, b) => Number(b.statview) - Number(a.statview)
+          );
+        } else if (this.sortOrder == "ยอดวิวต่อสัปดาห์") {
+          this.pictureSearch.sort((a, b) => {
+            return Number(b.statweek) - Number(a.statweek);
+          });
+        } else {
+          this.pictureSearch.sort(
+            (a, b) => Number(a.pt_timestamp) - Number(b.pt_timestamp)
+          );
+        }
+        this.startPicture = (this.page - 1) * 10 + 1;
+        this.endPicture = this.page * 10;
+        if (this.pictureSearch.length < this.endPicture) {
+          this.endPicture = this.pictureSearch.length;
+        }
+        for (let i = this.startPicture - 1; i < this.endPicture; i++) {
+          this.pictureList.push(this.pictureSearch[i]);
+        }
+      }
+    },
+    resetSearch() {
+      //ยกเลิกการค้นหา
+      this.txtsearch = "";
+      this.calPage();
+      this.page = 1;
+      this.sortOrder = "ยอดวิวรวม";
+      this.pictureListShowInPage();
+    },
+    searchData() {
+      //เมื่อกดปุ่มค้นหา
+      this.page = 1;
+      this.sortOrder = "ยอดวิวรวม";
+      this.pictureSearch = [];
+      this.pictureData.forEach(x => {
+        if (x.pt_title.indexOf(this.txtsearch) != -1) {
+          this.pictureSearch.push(x);
+        }
+      });
+      //ทำการหาจำนวนหน้าที่มีใหม่
+      let pageFilter = Math.ceil(this.pictureSearch.length / 10);
+      this.pageOptions = [];
+      for (let i = 1; i <= pageFilter; i++) {
+        this.pageOptions.push(i);
+      }
+      this.changePage();
+    },
+    changePage() {
+      //เปลี่ยนหน้า
+
+      if (this.txtsearch.trim().length == 0) {
+        this.pictureListShowInPage();
+      } else {
+        //ทำการเลือกข้อมูลในหน้านั้น
+        this.pictureList = [];
+        if (this.sortOrder == "ยอดวิวรวม") {
+          this.pictureSearch.sort(
+            (a, b) => Number(b.statview) - Number(a.statview)
+          );
+        } else if (this.sortOrder == "ยอดวิวต่อสัปดาห์") {
+          this.pictureSearch.sort((a, b) => {
+            return Number(b.statweek) - Number(a.statweek);
+          });
+        } else {
+          this.pictureSearch.sort(
+            (a, b) => Number(a.pt_timestamp) - Number(b.pt_timestamp)
+          );
+        }
+        this.startPicture = (this.page - 1) * 10 + 1;
+        this.endPicture = this.page * 10;
+        if (this.pictureSearch.length < this.endPicture) {
+          this.endPicture = this.pictureSearch.length;
+        }
+        for (let i = this.startPicture - 1; i < this.endPicture; i++) {
+          this.pictureList.push(this.pictureSearch[i]);
+        }
+      }
+    },
     async openNewPicture() {
       //เปิดหน้าต่างเพิ่มเรื่องใหม่
       await this.loadFolderList();
@@ -646,7 +1047,55 @@ export default {
       //ปุ่มเลือก MacOS ในวิธีอัพโหลด
       this.uploadWindows = false;
     },
+    async loadPictureList() {
+      //load ข้อมูลการ์ตูน
+      this.pictureData = [];
+      let startTime = 1630256400000; // 1-July-2021
+      let currentTime = new Date().getTime();
+      let diffTime = currentTime - startTime;
+      let diffWeek = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
+      let temp = {
+        diffWeek: diffWeek
+      };
 
+      let url = this.serverpath + "bo_picture_list.php";
+      let res = await axios.post(url, JSON.stringify(temp));
+      for (let i = 0; i < res.data.length; i++) {
+        this.pictureData.push(res.data[i]);
+      }
+      this.pictureListShowInPage();
+    },
+    pictureListShowInPage() {
+      // ทำข้อมูลสำหรับแสดงในหน้านั้น
+      this.pictureList = [];
+
+      let tempL = this.pictureList.length;
+      //ทำการ sort ข้อมูล
+      if (this.sortOrder == "ยอดวิวรวม") {
+        this.pictureData.sort(
+          (a, b) => Number(b.statview) - Number(a.statview)
+        );
+      } else if (this.sortOrder == "ยอดวิวต่อสัปดาห์") {
+        this.pictureData.sort((a, b) => {
+          return Number(b.statweek) - Number(a.statweek);
+        });
+      } else {
+        this.pictureData.sort(
+          (a, b) => Number(a.pt_timestamp) - Number(b.pt_timestamp)
+        );
+      }
+
+      //ทำการเลือกข้อมูลในหน้านั้น
+      this.startPicture = (this.page - 1) * 10 + 1;
+      this.endPicture = this.page * 10;
+      if (this.pictureData.length < this.endPicture) {
+        this.endPicture = this.pictureData.length;
+      }
+
+      for (let i = this.startPicture - 1; i < this.endPicture; i++) {
+        this.pictureList.push(this.pictureData[i]);
+      }
+    },
     async loadFolderList() {
       //โหลด Folder ใน picture
       this.optionFolderList = [];
@@ -657,6 +1106,10 @@ export default {
       });
       this.input.folder = this.optionFolderList[0];
     }
+  },
+  mounted() {
+    this.calPage(); //คำนวนหาเพจที่ต้องมี
+    this.loadPictureList();
   }
 };
 </script>

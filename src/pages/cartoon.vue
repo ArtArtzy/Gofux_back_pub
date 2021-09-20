@@ -402,15 +402,25 @@
             style="height:535px; overflow-y:scroll"
           >
             <div v-for="index in pageSample" :key="index">
-              {{ index }}
               <img
-                :src="pathSample + '0' + index + '.jpg'"
+                :src="
+                  pathSample +
+                    '0' +
+                    index +
+                    '.jpg?x=' +
+                    (Math.floor(Math.random() * 999) + 100)
+                "
                 alt=""
                 style="width:80%"
                 v-if="index <= 9"
               />
               <img
-                :src="pathSample + index + '.jpg'"
+                :src="
+                  pathSample +
+                    index +
+                    '.jpg?x=' +
+                    (Math.floor(Math.random() * 999) + 100)
+                "
                 alt=""
                 style="width:80%"
                 v-if="index > 9"
@@ -471,7 +481,7 @@ export default {
     changeOrder() {
       //เปลี่ยนการเรียง
       if (this.txtsearch == "") {
-        this.cartoonListShowInPage;
+        this.cartoonListShowInPage();
       } else {
         //ทำการเลือกข้อมูลในหน้านั้น
         this.cartoonList = [];
@@ -565,7 +575,7 @@ export default {
       };
       let url = this.serverpath + "bo_cartoon_show_last_file.php";
       let res = await axios.post(url, JSON.stringify(temp));
-      this.pageSample = res.data;
+      this.pageSample = Number(res.data);
       this.pathSample =
         this.serverpath + "cartoon/" + showResult[0].ct_folder + "/";
     },

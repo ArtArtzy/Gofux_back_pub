@@ -94,7 +94,7 @@
                 <div class="q-pl-md">
                   <q-icon name="fas fa-images" size="27px" />
                 </div>
-                <div class="q-pl-xl fontColor">แจกวาร์ป</div>
+                <div class="q-pl-xl fontColor">ภาพโป๊</div>
               </div>
 
               <div class="">

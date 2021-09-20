@@ -2,6 +2,7 @@
   <div style="max-width:1600px; margin:auto;">
     <div class="contentDiv ">
       <div class="row q-pt-md justify-between" v-show="caneditable">
+        <div>ใจเย็นหน้านี้ยังไม่เสร็จ...อารมณ์พี่ยังไม่มา</div>
         <div>
           <div class="row btncustom">
             <div class="q-px-md">
