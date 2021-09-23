@@ -12,7 +12,7 @@
               rounded
               placeholder="ค้นหาชื่อเรื่อง"
               dense
-              style="width:300px;"
+              style="width:200px;"
               @keyup.enter="searchData"
             >
               <template v-if="txtsearch" v-slot:append>
@@ -60,7 +60,7 @@
             <div class="q-px-md">
               <q-icon name="fas fa-cloud-upload-alt" />
             </div>
-            <div>วิธีการอัพโหลด</div>
+            <div>การอัพโหลด</div>
           </div>
           <div style="width: 15px;"></div>
           <div class="row btncustom" @click="openNewCartoon">

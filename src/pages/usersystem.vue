@@ -29,11 +29,9 @@
       </div>
 
       <div class="row borderTitle">
-        <div style="width: 130px;" class="">ชื่อผู้ใช้งาน</div>
+        <div style="width: 130px;" align="center">ชื่อผู้ใช้งาน</div>
         <div style="width: 100px;" align="center">ประเภท</div>
-        <div class="icondiv " align="center">
-          <q-icon name="fas fa-laptop" size="20px" />
-        </div>
+
         <div class="icondiv " align="center">
           <q-icon name="fas fa-user" size="20px" />
         </div>
@@ -90,104 +88,67 @@
         </div>
         <div style="width: 100px;" align="center">{{ item.rolename }}</div>
 
-        <div class="icondiv2 " align="center" v-if="item.frontpanel == 3">
-          <q-icon name="fas fa-times" style="color:#FF8888" />
-        </div>
-        <div class="icondiv2 " align="center" v-if="item.frontpanel == 1">
-          <q-icon name="fas fa-check" style="color:#C5EE90" />
-        </div>
-        <div class="icondiv2 " align="center" v-if="item.frontpanel == 2">
-          <q-icon name="fas fa-eye" color="primary" />
-        </div>
-
-        <div class="icondiv2 " align="center" v-if="item.actress == 3">
+        <div class="icondiv2 " align="center" v-if="item.actress == 0">
           <q-icon name="fas fa-times" style="color:#FF8888" />
         </div>
         <div class="icondiv2 " align="center" v-if="item.actress == 1">
           <q-icon name="fas fa-check" style="color:#C5EE90" />
         </div>
-        <div class="icondiv2 " align="center" v-if="item.actress == 2">
-          <q-icon name="fas fa-eye" color="primary" />
-        </div>
 
-        <div class="icondiv2 " align="center" v-if="item.movie == 3">
+        <div class="icondiv2 " align="center" v-if="item.movie == 0">
           <q-icon name="fas fa-times" style="color:#FF8888" />
         </div>
         <div class="icondiv2 " align="center" v-if="item.movie == 1">
           <q-icon name="fas fa-check" style="color:#C5EE90" />
         </div>
-        <div class="icondiv2 " align="center" v-if="item.movie == 2">
-          <q-icon name="fas fa-eye" color="primary" />
-        </div>
 
-        <div class="icondiv2 " align="center" v-if="item.cartoon == 3">
+        <div class="icondiv2 " align="center" v-if="item.cartoon == 0">
           <q-icon name="fas fa-times" style="color:#FF8888" />
         </div>
         <div class="icondiv2 " align="center" v-if="item.cartoon == 1">
           <q-icon name="fas fa-check" style="color:#C5EE90" />
         </div>
-        <div class="icondiv2 " align="center" v-if="item.cartoon == 2">
-          <q-icon name="fas fa-eye" color="primary" />
-        </div>
 
-        <div class="icondiv2 " align="center" v-if="item.story == 3">
+        <div class="icondiv2 " align="center" v-if="item.story == 0">
           <q-icon name="fas fa-times" style="color:#FF8888" />
         </div>
         <div class="icondiv2 " align="center" v-if="item.story == 1">
           <q-icon name="fas fa-check" style="color:#C5EE90" />
         </div>
-        <div class="icondiv2 " align="center" v-if="item.story == 2">
-          <q-icon name="fas fa-eye" color="primary" />
-        </div>
 
-        <div class="icondiv2 " align="center" v-if="item.picture == 3">
+        <div class="icondiv2 " align="center" v-if="item.picture == 0">
           <q-icon name="fas fa-times" style="color:#FF8888" />
         </div>
         <div class="icondiv2 " align="center" v-if="item.picture == 1">
           <q-icon name="fas fa-check" style="color:#C5EE90" />
         </div>
-        <div class="icondiv2 " align="center" v-if="item.picture == 2">
-          <q-icon name="fas fa-eye" color="primary" />
-        </div>
 
-        <div class="icondiv2 " align="center" v-if="item.ads == 3">
+        <div class="icondiv2 " align="center" v-if="item.ads == 0">
           <q-icon name="fas fa-times" style="color:#FF8888" />
         </div>
         <div class="icondiv2 " align="center" v-if="item.ads == 1">
           <q-icon name="fas fa-check" style="color:#C5EE90" />
         </div>
-        <div class="icondiv2 " align="center" v-if="item.ads == 2">
-          <q-icon name="fas fa-eye" color="primary" />
-        </div>
 
-        <div class="icondiv2 " align="center" v-if="item.stat == 3">
+        <div class="icondiv2 " align="center" v-if="item.stat == 0">
           <q-icon name="fas fa-times" style="color:#FF8888" />
         </div>
         <div class="icondiv2 " align="center" v-if="item.stat == 1">
           <q-icon name="fas fa-check" style="color:#C5EE90" />
         </div>
-        <div class="icondiv2 " align="center" v-if="item.stat == 2">
-          <q-icon name="fas fa-eye" color="primary" />
-        </div>
 
-        <div class="icondiv2 " align="center" v-if="item.member == 3">
+        <div class="icondiv2 " align="center" v-if="item.member == 0">
           <q-icon name="fas fa-times" style="color:#FF8888" />
         </div>
         <div class="icondiv2 " align="center" v-if="item.member == 1">
           <q-icon name="fas fa-check" style="color:#C5EE90" />
         </div>
-        <div class="icondiv2 " align="center" v-if="item.member == 2">
-          <q-icon name="fas fa-eye" color="primary" />
-        </div>
 
-        <div class="icondiv2 " align="center" v-if="item.system == 3">
+        <div class="icondiv2 " align="center" v-if="item.system == 0">
           <q-icon name="fas fa-times" style="color:#FF8888" />
         </div>
         <div class="icondiv2 " align="center" v-if="item.system == 1">
           <q-icon name="fas fa-check" style="color:#C5EE90" />
-        </div>
-        <div class="icondiv2 " align="center" v-if="item.system == 2">
-          <q-icon name="fas fa-eye" color="primary" />
         </div>
 
         <div
@@ -227,15 +188,11 @@
         </div>
       </div>
       <div class="row remarkDiv">
-        <div class="col-4" align="left">
+        <div class="col-6" align="center">
           <q-icon name="fas fa-check" style="color:#C5EE90" />
           ใช้งานได้ทั้งหมด
         </div>
-        <div class="col-4" align="center">
-          <q-icon name="fas fa-eye" color="primary" />
-          ดูได้เท่านั้น
-        </div>
-        <div class="col-4" align="right">
+        <div class="col-6" align="center">
           <q-icon name="fas fa-times" style="color:#FF8888" />
           ไม่สามารถดูได้
         </div>
@@ -280,61 +237,6 @@
             <div class="col-5">
               <div class="row">
                 <div style="width:50px;" align="left">
-                  <q-icon name="fas fa-laptop" />
-                </div>
-                <div style="width: 150px;" align="left">จัดการหน้าเว็บไซด์</div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.frontpanel == 1
-                      ? (accessJson.frontpanel = 0)
-                      : (accessJson.frontpanel = 1)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-check"
-                    :class="[
-                      accessJson.frontpanel == 1 ? 'greensymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.frontpanel == 2
-                      ? (accessJson.frontpanel = 0)
-                      : (accessJson.frontpanel = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.frontpanel == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.frontpanel == 3
-                      ? (accessJson.frontpanel = 0)
-                      : (accessJson.frontpanel = 3)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-times"
-                    :class="[
-                      accessJson.frontpanel == 3 ? 'redsymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-              </div>
-
-              <div class="row q-pt-md">
-                <div style="width:50px;" align="left">
                   <q-icon name="fas fa-user" />
                 </div>
                 <div style="width: 150px;" align="left">นักแสดงยอดนิยม</div>
@@ -354,35 +256,20 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.actress == 2
-                      ? (accessJson.actress = 0)
-                      : (accessJson.actress = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.actress == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.actress == 3
-                      ? (accessJson.actress = 0)
-                      : (accessJson.actress = 3)
+                    accessJson.actress == 0
+                      ? (accessJson.actress = 1)
+                      : (accessJson.actress = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.actress == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.actress == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -409,35 +296,20 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.movie == 2
-                      ? (accessJson.movie = 0)
-                      : (accessJson.movie = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.movie == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.movie == 3
-                      ? (accessJson.movie = 0)
-                      : (accessJson.movie = 3)
+                    accessJson.movie == 0
+                      ? (accessJson.movie = 1)
+                      : (accessJson.movie = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.movie == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.movie == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -464,35 +336,20 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.cartoon == 2
-                      ? (accessJson.cartoon = 0)
-                      : (accessJson.cartoon = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.cartoon == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.cartoon == 3
-                      ? (accessJson.cartoon = 0)
-                      : (accessJson.cartoon = 3)
+                    accessJson.cartoon == 0
+                      ? (accessJson.cartoon = 1)
+                      : (accessJson.cartoon = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.cartoon == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.cartoon == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -519,48 +376,30 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.story == 2
-                      ? (accessJson.story = 0)
-                      : (accessJson.story = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.story == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.story == 3
-                      ? (accessJson.story = 0)
-                      : (accessJson.story = 3)
+                    accessJson.story == 0
+                      ? (accessJson.story = 1)
+                      : (accessJson.story = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.story == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.story == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
               </div>
-            </div>
 
-            <div class="col-2"><div class="vl" style="margin:auto;"></div></div>
-            <div class="col-5 ">
-              <div class="row">
+              <div class="row q-pt-md">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-images" />
                 </div>
-                <div style="width: 150px;" align="left">แจกวาร์ป</div>
+                <div style="width: 150px;" align="left">ภาพโป๊</div>
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
@@ -577,41 +416,29 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.picture == 2
-                      ? (accessJson.picture = 0)
-                      : (accessJson.picture = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.picture == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.picture == 3
-                      ? (accessJson.picture = 0)
-                      : (accessJson.picture = 3)
+                    accessJson.picture == 0
+                      ? (accessJson.picture = 1)
+                      : (accessJson.picture = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.picture == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.picture == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
               </div>
+            </div>
 
-              <div class="row q-pt-md">
+            <div class="col-2"><div class="vl" style="margin:auto;"></div></div>
+            <div class="col-5 ">
+              <div class="row">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-film" />
                 </div>
@@ -632,32 +459,19 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.ads == 2
-                      ? (accessJson.ads = 0)
-                      : (accessJson.ads = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[accessJson.ads == 2 ? 'bluesymbol' : 'greysymbol']"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.ads == 3
-                      ? (accessJson.ads = 0)
-                      : (accessJson.ads = 3)
+                    accessJson.ads == 0
+                      ? (accessJson.ads = 1)
+                      : (accessJson.ads = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
-                    :class="[accessJson.ads == 3 ? 'redsymbol' : 'greysymbol']"
+                    :class="[accessJson.ads == 0 ? 'redsymbol' : 'greysymbol']"
                   />
                 </div>
               </div>
@@ -683,34 +497,19 @@
                     ]"
                   />
                 </div>
-                <div
-                  style="width:50px; "
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.stat == 2
-                      ? (accessJson.stat = 0)
-                      : (accessJson.stat = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.stat == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.stat == 3
-                      ? (accessJson.stat = 0)
-                      : (accessJson.stat = 3)
+                    accessJson.stat == 0
+                      ? (accessJson.stat = 1)
+                      : (accessJson.stat = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
-                    :class="[accessJson.stat == 3 ? 'redsymbol' : 'greysymbol']"
+                    :class="[accessJson.stat == 0 ? 'redsymbol' : 'greysymbol']"
                   />
                 </div>
               </div>
@@ -736,35 +535,20 @@
                     ]"
                   />
                 </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.member == 2
-                      ? (accessJson.member = 0)
-                      : (accessJson.member = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.member == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div
                   style="width:50px "
                   class="cursor-pointer"
                   @click="
-                    accessJson.member == 3
-                      ? (accessJson.member = 0)
-                      : (accessJson.member = 3)
+                    accessJson.member == 0
+                      ? (accessJson.member = 1)
+                      : (accessJson.member = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.member == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.member == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -791,35 +575,20 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.system == 2
-                      ? (accessJson.system = 0)
-                      : (accessJson.system = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.system == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.system == 3
-                      ? (accessJson.system = 0)
-                      : (accessJson.system = 3)
+                    accessJson.system == 0
+                      ? (accessJson.system = 1)
+                      : (accessJson.system = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.system == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.system == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -830,7 +599,7 @@
                 <q-btn
                   label="ยกเลิก"
                   outline
-                  color="deep-purple-13"
+                  color="white"
                   style="width:120px; height:45px;"
                   @click="
                     addTypeMenu = false;
@@ -881,62 +650,8 @@
           </div>
           <div class="row q-pt-md q-px-xl">
             <div class="col-5">
+              <!-- นักแสดงยอดนิยม -->
               <div class="row">
-                <div style="width:50px;" align="left">
-                  <q-icon name="fas fa-laptop" />
-                </div>
-                <div style="width: 150px;" align="left">จัดการหน้าเว็บไซด์</div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.frontpanel == 1
-                      ? (accessJson.frontpanel = 0)
-                      : (accessJson.frontpanel = 1)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-check"
-                    :class="[
-                      accessJson.frontpanel == 1 ? 'greensymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.frontpanel == 2
-                      ? (accessJson.frontpanel = 0)
-                      : (accessJson.frontpanel = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.frontpanel == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.frontpanel == 3
-                      ? (accessJson.frontpanel = 0)
-                      : (accessJson.frontpanel = 3)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-times"
-                    :class="[
-                      accessJson.frontpanel == 3 ? 'redsymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-              </div>
-
-              <div class="row q-pt-md">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-user" />
                 </div>
@@ -957,40 +672,25 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.actress == 2
-                      ? (accessJson.actress = 0)
-                      : (accessJson.actress = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.actress == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.actress == 3
-                      ? (accessJson.actress = 0)
-                      : (accessJson.actress = 3)
+                    accessJson.actress == 0
+                      ? (accessJson.actress = 1)
+                      : (accessJson.actress = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.actress == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.actress == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
               </div>
-
+              <!-- หนังโป๊ -->
               <div class="row q-pt-md">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-video" />
@@ -1012,40 +712,25 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.movie == 2
-                      ? (accessJson.movie = 0)
-                      : (accessJson.movie = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.movie == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.movie == 3
-                      ? (accessJson.movie = 0)
-                      : (accessJson.movie = 3)
+                    accessJson.movie == 0
+                      ? (accessJson.movie = 1)
+                      : (accessJson.movie = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.movie == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.movie == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
               </div>
-
+              <!-- การ์ตูน -->
               <div class="row q-pt-md">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-book-open" />
@@ -1067,35 +752,20 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.cartoon == 2
-                      ? (accessJson.cartoon = 0)
-                      : (accessJson.cartoon = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.cartoon == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.cartoon == 3
-                      ? (accessJson.cartoon = 0)
-                      : (accessJson.cartoon = 3)
+                    accessJson.cartoon == 0
+                      ? (accessJson.cartoon = 1)
+                      : (accessJson.cartoon = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.cartoon == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.cartoon == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -1122,48 +792,30 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.story == 2
-                      ? (accessJson.story = 0)
-                      : (accessJson.story = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.story == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.story == 3
-                      ? (accessJson.story = 0)
-                      : (accessJson.story = 3)
+                    accessJson.story == 0
+                      ? (accessJson.story = 1)
+                      : (accessJson.story = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.story == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.story == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
               </div>
-            </div>
 
-            <div class="col-2"><div class="vl" style="margin:auto;"></div></div>
-            <div class="col-5 ">
-              <div class="row">
+              <div class="row q-pt-md">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-images" />
                 </div>
-                <div style="width: 150px;" align="left">แจกวาร์ป</div>
+                <div style="width: 150px;" align="left">ภาพโป๊</div>
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
@@ -1180,41 +832,29 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.picture == 2
-                      ? (accessJson.picture = 0)
-                      : (accessJson.picture = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.picture == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.picture == 3
-                      ? (accessJson.picture = 0)
-                      : (accessJson.picture = 3)
+                    accessJson.picture == 0
+                      ? (accessJson.picture = 1)
+                      : (accessJson.picture = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.picture == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.picture == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
               </div>
+            </div>
 
-              <div class="row q-pt-md">
+            <div class="col-2"><div class="vl" style="margin:auto;"></div></div>
+            <div class="col-5 ">
+              <div class="row">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-film" />
                 </div>
@@ -1235,32 +875,19 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.ads == 2
-                      ? (accessJson.ads = 0)
-                      : (accessJson.ads = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[accessJson.ads == 2 ? 'bluesymbol' : 'greysymbol']"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.ads == 3
-                      ? (accessJson.ads = 0)
-                      : (accessJson.ads = 3)
+                    accessJson.ads == 0
+                      ? (accessJson.ads = 1)
+                      : (accessJson.ads = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
-                    :class="[accessJson.ads == 3 ? 'redsymbol' : 'greysymbol']"
+                    :class="[accessJson.ads == 0 ? 'redsymbol' : 'greysymbol']"
                   />
                 </div>
               </div>
@@ -1286,34 +913,19 @@
                     ]"
                   />
                 </div>
-                <div
-                  style="width:50px; "
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.stat == 2
-                      ? (accessJson.stat = 0)
-                      : (accessJson.stat = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.stat == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.stat == 3
-                      ? (accessJson.stat = 0)
-                      : (accessJson.stat = 3)
+                    accessJson.stat == 0
+                      ? (accessJson.stat = 1)
+                      : (accessJson.stat = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
-                    :class="[accessJson.stat == 3 ? 'redsymbol' : 'greysymbol']"
+                    :class="[accessJson.stat == 0 ? 'redsymbol' : 'greysymbol']"
                   />
                 </div>
               </div>
@@ -1339,35 +951,20 @@
                     ]"
                   />
                 </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.member == 2
-                      ? (accessJson.member = 0)
-                      : (accessJson.member = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.member == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div
                   style="width:50px "
                   class="cursor-pointer"
                   @click="
-                    accessJson.member == 3
-                      ? (accessJson.member = 0)
-                      : (accessJson.member = 3)
+                    accessJson.member == 0
+                      ? (accessJson.member = 1)
+                      : (accessJson.member = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.member == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.member == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -1394,35 +991,20 @@
                     ]"
                   />
                 </div>
+
                 <div
                   style="width:50px;"
                   class="cursor-pointer"
                   @click="
-                    accessJson.system == 2
-                      ? (accessJson.system = 0)
-                      : (accessJson.system = 2)
-                  "
-                >
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.system == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div
-                  style="width:50px;"
-                  class="cursor-pointer"
-                  @click="
-                    accessJson.system == 3
-                      ? (accessJson.system = 0)
-                      : (accessJson.system = 3)
+                    accessJson.system == 0
+                      ? (accessJson.system = 1)
+                      : (accessJson.system = 0)
                   "
                 >
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.system == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.system == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -1433,7 +1015,7 @@
                 <q-btn
                   label="ยกเลิก"
                   outline
-                  color="deep-purple-13"
+                  color="white"
                   style="width:120px; height:45px;"
                   @click="cancelAddUserType"
                 />
@@ -1536,38 +1118,8 @@
           </div>
           <div class="row q-pt-md q-px-xl">
             <div class="col-5">
-              <div class="row">
-                <div style="width:50px;" align="left">
-                  <q-icon name="fas fa-laptop" />
-                </div>
-                <div style="width: 150px;" align="left">จัดการหน้าเว็บไซด์</div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-check"
-                    :class="[
-                      accessJson.frontpanel == 1 ? 'greensymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.frontpanel == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-times"
-                    :class="[
-                      accessJson.frontpanel == 3 ? 'redsymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-              </div>
-
-              <div class="row q-pt-md">
+              <!-- นักแสดงยอดนิยม -->
+              <div class="row ">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-user" />
                 </div>
@@ -1580,24 +1132,18 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.actress == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.actress == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.actress == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
               </div>
 
+              <!-- หนังโป๊ -->
               <div class="row q-pt-md">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-video" />
@@ -1611,19 +1157,12 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.movie == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.movie == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.movie == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -1642,19 +1181,12 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.cartoon == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.cartoon == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.cartoon == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -1673,19 +1205,36 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.story == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.story == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.story == 0 ? 'redsymbol' : 'greysymbol'
+                    ]"
+                  />
+                </div>
+              </div>
+
+              <div class="row q-pt-md">
+                <div style="width:50px;" align="left">
+                  <q-icon name="fas fa-images" />
+                </div>
+                <div style="width: 150px;" align="left">ภาพโป๊</div>
+                <div style="width:50px;">
+                  <q-icon
+                    name="fas fa-check"
+                    :class="[
+                      accessJson.picture == 1 ? 'greensymbol' : 'greysymbol'
+                    ]"
+                  />
+                </div>
+
+                <div style="width:50px;">
+                  <q-icon
+                    name="fas fa-times"
+                    :class="[
+                      accessJson.picture == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -1695,37 +1244,6 @@
             <div class="col-2"><div class="vl" style="margin:auto;"></div></div>
             <div class="col-5 ">
               <div class="row">
-                <div style="width:50px;" align="left">
-                  <q-icon name="fas fa-images" />
-                </div>
-                <div style="width: 150px;" align="left">แจกวาร์ป</div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-check"
-                    :class="[
-                      accessJson.picture == 1 ? 'greensymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.picture == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-times"
-                    :class="[
-                      accessJson.picture == 3 ? 'redsymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-              </div>
-
-              <div class="row q-pt-md">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-film" />
                 </div>
@@ -1738,16 +1256,11 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[accessJson.ads == 2 ? 'bluesymbol' : 'greysymbol']"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
-                    :class="[accessJson.ads == 3 ? 'redsymbol' : 'greysymbol']"
+                    :class="[accessJson.ads == 0 ? 'redsymbol' : 'greysymbol']"
                   />
                 </div>
               </div>
@@ -1765,18 +1278,11 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px; ">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.stat == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
-                    :class="[accessJson.stat == 3 ? 'redsymbol' : 'greysymbol']"
+                    :class="[accessJson.stat == 0 ? 'redsymbol' : 'greysymbol']"
                   />
                 </div>
               </div>
@@ -1794,19 +1300,12 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.member == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px ">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.member == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.member == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -1825,19 +1324,12 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.system == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.system == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.system == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -1848,7 +1340,7 @@
                 <q-btn
                   label="ยกเลิก"
                   outline
-                  color="deep-purple-13"
+                  color="white"
                   style="width:120px; height:45px;"
                   @click="showMain()"
                 />
@@ -1874,16 +1366,20 @@
           ลบผู้ดูแลระบบ
         </div>
         <div class="bginside2 font18">
-          <div class="q-pt-lg">
+          <div class="" style="padding-top:25px;">
             <img src="../../public/images/exclaim.png" alt="" />
           </div>
           <div>
             คุณต้องการลบประเภท <i>{{ userSystemNameDel }}</i> ?
           </div>
-          <div class="row q-pl-md justify-between">
+          <div
+            class="row q-pl-md justify-between"
+            style="width:300px; margin:auto;"
+          >
             <div class="q-pt-lg">
               <q-btn
-                class="outlineblue font18"
+                style="width:120px; height:45px;"
+                class="outlineblue "
                 outline
                 label="ยกเลิก"
                 @click="confirmDelSystemUser = false"
@@ -1891,7 +1387,8 @@
             </div>
             <div class="q-pt-lg q-pr-md">
               <q-btn
-                class="bluebtnmd font18"
+                style="width:120px; height:45px;"
+                class="bluebtnmd"
                 label="ตกลง"
                 @click="delUserSystemReal"
               />
@@ -1997,40 +1494,12 @@
               />
             </div>
           </div>
-          <div class="row q-pt-md q-px-xl">
+          <div
+            class="row q-pt-md "
+            style="width: 780px; position:relative;left:150px;"
+          >
             <div class="col-5">
-              <div class="row">
-                <div style="width:50px;" align="left">
-                  <q-icon name="fas fa-laptop" />
-                </div>
-                <div style="width: 150px;" align="left">จัดการหน้าเว็บไซด์</div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-check"
-                    :class="[
-                      accessJson.frontpanel == 1 ? 'greensymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.frontpanel == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-times"
-                    :class="[
-                      accessJson.frontpanel == 3 ? 'redsymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-              </div>
-
-              <div class="row q-pt-md">
+              <div class="row ">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-user" />
                 </div>
@@ -2043,19 +1512,12 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.actress == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.actress == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.actress == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -2074,19 +1536,12 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.movie == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.movie == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.movie == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -2107,17 +1562,9 @@
                 </div>
                 <div style="width:50px;">
                   <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.cartoon == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
-                <div style="width:50px;">
-                  <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.cartoon == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.cartoon == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -2136,32 +1583,22 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.story == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.story == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.story == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
               </div>
-            </div>
 
-            <div class="col-2"><div class="vl" style="margin:auto;"></div></div>
-            <div class="col-5 ">
-              <div class="row">
+              <div class="row q-pt-md">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-images" />
                 </div>
-                <div style="width: 150px;" align="left">แจกวาร์ป</div>
+                <div style="width: 150px;" align="left">ภาพโป๊</div>
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-check"
@@ -2170,25 +1607,23 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.picture == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.picture == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.picture == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
               </div>
+            </div>
 
-              <div class="row q-pt-md">
+            <div class="col-2 " style="width: 50px;">
+              <div class="vl" style="margin:auto;"></div>
+            </div>
+            <div class="col-5 q-pl-md ">
+              <div class="row">
                 <div style="width:50px;" align="left">
                   <q-icon name="fas fa-film" />
                 </div>
@@ -2203,14 +1638,8 @@
                 </div>
                 <div style="width:50px;">
                   <q-icon
-                    name="fas fa-eye"
-                    :class="[accessJson.ads == 2 ? 'bluesymbol' : 'greysymbol']"
-                  />
-                </div>
-                <div style="width:50px;">
-                  <q-icon
                     name="fas fa-times"
-                    :class="[accessJson.ads == 3 ? 'redsymbol' : 'greysymbol']"
+                    :class="[accessJson.ads == 0 ? 'redsymbol' : 'greysymbol']"
                   />
                 </div>
               </div>
@@ -2228,18 +1657,11 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px; ">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.stat == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
-                    :class="[accessJson.stat == 3 ? 'redsymbol' : 'greysymbol']"
+                    :class="[accessJson.stat == 0 ? 'redsymbol' : 'greysymbol']"
                   />
                 </div>
               </div>
@@ -2257,19 +1679,12 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.member == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px ">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.member == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.member == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
@@ -2288,42 +1703,35 @@
                     ]"
                   />
                 </div>
-                <div style="width:50px;">
-                  <q-icon
-                    name="fas fa-eye"
-                    :class="[
-                      accessJson.system == 2 ? 'bluesymbol' : 'greysymbol'
-                    ]"
-                  />
-                </div>
+
                 <div style="width:50px;">
                   <q-icon
                     name="fas fa-times"
                     :class="[
-                      accessJson.system == 3 ? 'redsymbol' : 'greysymbol'
+                      accessJson.system == 0 ? 'redsymbol' : 'greysymbol'
                     ]"
                   />
                 </div>
               </div>
             </div>
-            <div class="row justify-center q-pt-lg" style="width:100%">
-              <div class="q-pr-md">
-                <q-btn
-                  label="ยกเลิก"
-                  outline
-                  color="deep-purple-13"
-                  style="width:120px; height:45px;"
-                  @click="editNewStaff = false"
-                />
-              </div>
-              <div class="q-pl-md">
-                <q-btn
-                  label="บันทึก"
-                  color="deep-purple-13"
-                  style="width:120px; height:45px;"
-                  @click="saveEditStaff()"
-                />
-              </div>
+          </div>
+          <div class="row justify-center q-pt-lg" style="width:100%">
+            <div class="q-pr-md">
+              <q-btn
+                label="ยกเลิก"
+                outline
+                color="white"
+                style="width:120px; height:45px;"
+                @click="editNewStaff = false"
+              />
+            </div>
+            <div class="q-pl-md">
+              <q-btn
+                label="บันทึก"
+                color="deep-purple-13"
+                style="width:120px; height:45px;"
+                @click="saveEditStaff()"
+              />
             </div>
           </div>
         </div>
@@ -2337,7 +1745,7 @@
           การเข้ารหัส
         </div>
         <div class="bginside2 font18">
-          <div class="q-pa-md">
+          <div class="q-px-md" style="padding-top:25px;">
             <q-input
               label="รหัสป้องกันหนัง"
               dark
@@ -2345,14 +1753,18 @@
               v-model="securityKey"
             ></q-input>
           </div>
-          <div class="font14 q-px-md">
+          <div class="font14 q-px-md q-pt-md">
             รหัสที่ใช้ในการป้องกันการนำหนัง
             จำเป็นต้องเป็นค่าเดียวกับระบบหลังบ้านใน jw player
           </div>
-          <div class="row q-pl-md justify-between">
+          <div
+            class="row q-pl-md justify-between"
+            style="width:300px; margin:auto;"
+          >
             <div class="q-pt-lg">
               <q-btn
-                class="outlineblue font18"
+                style="width:120px; height:45px;"
+                class="outlineblue"
                 outline
                 label="ยกเลิก"
                 @click="addKeyDialog = false"
@@ -2360,7 +1772,8 @@
             </div>
             <div class="q-pt-lg q-pr-md">
               <q-btn
-                class="bluebtnmd font18"
+                style="width:120px; height:45px;"
+                class="bluebtnmd"
                 label="ตกลง"
                 @click="editNewKeybtn"
               />
@@ -2387,16 +1800,15 @@ export default {
       editTypeMenu: false, //เปิด Dialog จัดการประเภท
       addTypeMenu: false, //เปิด Dialog เพิ่มประเภท
       accessJson: {
-        frontpanel: 0,
-        actress: 0,
-        movie: 0,
-        cartoon: 0,
-        story: 0,
-        picture: 0,
-        ads: 0,
-        stat: 0,
-        member: 0,
-        system: 0
+        actress: 1,
+        movie: 1,
+        cartoon: 1,
+        story: 1,
+        picture: 1,
+        ads: 1,
+        stat: 1,
+        member: 1,
+        system: 1
       }, //ค่าสิทธิของแต่ละ usersystemtype ในหน้า จัดการประเภทผู้ดูแล
       confirmDelUserType: false, //Dialog ยืนยันการลบ usersystemtype
       cannotDelUserType: false, //Dialog บอกว่าลบ usersystemtype นี้ไม่ได้เพราะมีคนใช้อยู่
@@ -2504,16 +1916,15 @@ export default {
     addNewTypeStep2() {
       //เมื่อกดปุ่ม เพิ่มประเภท ในหน้าจัดการประเภทผู้ดูแลระบบ
       this.accessJson = {
-        frontpanel: 0,
-        actress: 0,
-        movie: 0,
-        cartoon: 0,
-        story: 0,
-        picture: 0,
-        ads: 0,
-        stat: 0,
-        member: 0,
-        system: 0
+        actress: 1,
+        movie: 1,
+        cartoon: 1,
+        story: 1,
+        picture: 1,
+        ads: 1,
+        stat: 1,
+        member: 1,
+        system: 1
       };
       this.inputTypeText = "";
       this.editTypeMenu = false; //ปิดหน้าต่างจัดการประเภทผู้ดูแลระบบ
@@ -2524,7 +1935,6 @@ export default {
       let temp = {
         id: this.userType,
         typename: this.inputTypeText,
-        frontpanel: this.accessJson.frontpanel,
         actress: this.accessJson.actress,
         movie: this.accessJson.movie,
         cartoon: this.accessJson.cartoon,
@@ -2557,24 +1967,9 @@ export default {
         this.redNotify("กรุณาใส่ชื่อประเภท");
         return;
       }
-      if (
-        this.accessJson.frontpanel == 0 ||
-        this.accessJson.actress == 0 ||
-        this.accessJson.movie == 0 ||
-        this.accessJson.cartoon == 0 ||
-        this.accessJson.story == 0 ||
-        this.accessJson.picture == 0 ||
-        this.accessJson.ads == 0 ||
-        this.accessJson.stat == 0 ||
-        this.accessJson.member == 0 ||
-        this.accessJson.system == 0
-      ) {
-        this.redNotify("กรุณากำหนดสิทธิให้ครบทุกหมวด");
-        return;
-      }
+
       let temp = {
         typename: this.inputTypeText,
-        frontpanel: this.accessJson.frontpanel,
         actress: this.accessJson.actress,
         movie: this.accessJson.movie,
         cartoon: this.accessJson.cartoon,
@@ -2596,16 +1991,15 @@ export default {
         this.addTypeMenu = false;
         this.editTypeMenu = true;
         this.accessJson = {
-          frontpanel: 0,
-          actress: 0,
-          movie: 0,
-          cartoon: 0,
-          story: 0,
-          picture: 0,
-          ads: 0,
-          stat: 0,
-          member: 0,
-          system: 0
+          actress: 1,
+          movie: 1,
+          cartoon: 1,
+          story: 1,
+          picture: 1,
+          ads: 1,
+          stat: 1,
+          member: 1,
+          system: 1
         };
         this.inputTypeText = "";
         this.loadData();
@@ -2703,7 +2097,6 @@ export default {
       }
     },
 
-    //************ */Table
     delSystemUser(id, realname) {
       //เรียกหน้าต่างลบ user ขึ้นมา
       if (realname == "admin") {
@@ -2777,12 +2170,9 @@ export default {
     }
   },
   async mounted() {
-    let accessable = await this.checkAuth(10);
-    //accesable =1 : access ,2:view only, 3: can not access
-    if (accessable == 2) {
-      this.canEditAble = false; //view only mode
-    }
-    if (accessable != 3) {
+    let accessable = await this.checkAuth(9);
+    //accesable =1 : access ,0 can not access
+    if (accessable != 0) {
       this.loadData(); //โหลดข้อมูล usersystem
     }
   }
@@ -2800,7 +2190,7 @@ export default {
   line-height: 45px;
 }
 .remarkDiv {
-  width: 600px;
+  width: 400px;
   margin: auto;
   border: 1px solid white;
   border-radius: 5px;
@@ -2808,10 +2198,10 @@ export default {
   margin-top: 20px;
 }
 .icondiv {
-  width: calc((100% - 370px) / 10);
+  width: calc((100% - 370px) / 9);
 }
 .icondiv2 {
-  width: calc((100% - 415px) / 10);
+  width: calc((100% - 415px) / 9);
 }
 .disableText2 {
   color: #5f5f5f;

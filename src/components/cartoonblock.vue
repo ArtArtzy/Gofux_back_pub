@@ -103,6 +103,8 @@ export default {
       this.viewPerWeek = newData["statweek"];
       this.viewTotal = newData["statview"];
       this.status = newData["status"];
+      this.id = newData["ct_id"];
+      this.title = newData["ct_title"];
     }
   },
   mounted() {

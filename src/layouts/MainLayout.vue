@@ -15,29 +15,12 @@
           </div>
           <div class="q-px-lg column colmenu justify-between">
             <div style="width:290px;">
-              <!-- จัดการหน้าเว็บไซด์ -->
-              <div
-                class="row  cursor-pointer"
-                v-show="accessMenu.frontpanel != 3"
-                @click="websiteBtn"
-                :class="[menuSelected == 1 ? 'boxdivSelect' : 'boxdiv']"
-              >
-                <div class="q-pl-md">
-                  <q-icon name="fas fa-laptop" size="27px" />
-                </div>
-                <div class="q-pl-xl  fontColor">จัดการหน้าเว็บไซด์</div>
-              </div>
-
-              <div class="" v-show="accessMenu.frontpanel != 3">
-                <hr />
-              </div>
-
               <!-- นักแสดงยอดนิยม  -->
               <div
                 class="row   cursor-pointer"
-                v-show="accessMenu.actress != 3"
+                v-show="accessMenu.actress != 0"
                 @click="actressBtn"
-                :class="[menuSelected == 2 ? 'boxdivSelect' : 'boxdiv']"
+                :class="[menuSelected == 1 ? 'boxdivSelect' : 'boxdiv']"
               >
                 <div class="q-pl-md">
                   <q-icon name="fas fa-user" size="27px" />
@@ -48,9 +31,9 @@
               <!-- หนังโป๊ -->
               <div
                 class="row q-pt-lg  cursor-pointer"
-                v-show="accessMenu.movie != 3"
+                v-show="accessMenu.movie != 0"
                 @click="movieBtn"
-                :class="[menuSelected == 3 ? 'boxdivSelect' : 'boxdiv']"
+                :class="[menuSelected == 2 ? 'boxdivSelect' : 'boxdiv']"
               >
                 <div class="q-pl-md">
                   <q-icon name="fas fa-video" size="27px" />
@@ -61,9 +44,9 @@
               <!-- การ์ตูน -->
               <div
                 class="row q-pt-lg  cursor-pointer"
-                v-show="accessMenu.cartoon != 3"
+                v-show="accessMenu.cartoon != 0"
                 @click="cartoonBtn"
-                :class="[menuSelected == 4 ? 'boxdivSelect' : 'boxdiv']"
+                :class="[menuSelected == 3 ? 'boxdivSelect' : 'boxdiv']"
               >
                 <div class="q-pl-md">
                   <q-icon name="fas fa-book-open" size="27px" />
@@ -74,9 +57,9 @@
               <!-- เล่าเรื่องเสียว -->
               <div
                 class="row q-pt-lg cursor-pointer"
-                v-show="accessMenu.story != 3"
+                v-show="accessMenu.story != 0"
                 @click="storyBtn"
-                :class="[menuSelected == 5 ? 'boxdivSelect' : 'boxdiv']"
+                :class="[menuSelected == 4 ? 'boxdivSelect' : 'boxdiv']"
               >
                 <div class="q-pl-md">
                   <q-icon name="fas fa-newspaper" size="27px" />
@@ -87,9 +70,9 @@
               <!-- แจกวาร์ป -->
               <div
                 class="row q-pt-lg   cursor-pointer"
-                v-show="accessMenu.picture != 3"
+                v-show="accessMenu.picture != 0"
                 @click="pictureBtn"
-                :class="[menuSelected == 6 ? 'boxdivSelect' : 'boxdiv']"
+                :class="[menuSelected == 5 ? 'boxdivSelect' : 'boxdiv']"
               >
                 <div class="q-pl-md">
                   <q-icon name="fas fa-images" size="27px" />
@@ -104,9 +87,9 @@
               <!-- โฆษณา -->
               <div
                 class="row   cursor-pointer"
-                v-show="accessMenu.ads != 3"
+                v-show="accessMenu.ads != 0"
                 @click="adsBtn"
-                :class="[menuSelected == 7 ? 'boxdivSelect' : 'boxdiv']"
+                :class="[menuSelected == 6 ? 'boxdivSelect' : 'boxdiv']"
               >
                 <div class="q-pl-md">
                   <q-icon name="fas fa-film" size="27px" />
@@ -118,8 +101,8 @@
               <div
                 class="row q-pt-lg cursor-pointer"
                 @click="analysisBtn"
-                :class="[menuSelected == 8 ? 'boxdivSelect' : 'boxdiv']"
-                v-show="accessMenu.stat != 3"
+                :class="[menuSelected == 7 ? 'boxdivSelect' : 'boxdiv']"
+                v-show="accessMenu.stat != 0"
               >
                 <div class="q-pl-md">
                   <q-icon name="fas fa-chart-line" size="27px" />
@@ -131,8 +114,8 @@
               <div
                 class="row q-pt-lg  cursor-pointer"
                 @click="userBtn"
-                :class="[menuSelected == 9 ? 'boxdivSelect' : 'boxdiv']"
-                v-show="accessMenu.member != 3"
+                :class="[menuSelected == 8 ? 'boxdivSelect' : 'boxdiv']"
+                v-show="accessMenu.member != 0"
               >
                 <div class="q-pl-md">
                   <q-icon name="fas fa-users" size="27px" />
@@ -144,8 +127,8 @@
               <div
                 class="row q-pt-lg  cursor-pointer"
                 @click="usersystemBtn"
-                :class="[menuSelected == 10 ? 'boxdivSelect' : 'boxdiv']"
-                v-show="accessMenu.system != 3"
+                :class="[menuSelected == 9 ? 'boxdivSelect' : 'boxdiv']"
+                v-show="accessMenu.system != 0"
               >
                 <div class="q-pl-md">
                   <q-icon name="fas fa-users-cog" size="27px" />
@@ -248,84 +231,77 @@ export default {
     },
     usersystemBtn() {
       //ปุ่ม ผู้ดูแลระบบ ในหน้าเมนู ทำการเปิดหน้า usersystem
-      if (this.menuSelected != 10) {
-        this.menuSelected = 10;
-        this.$q.localStorage.set("menuselected", 10);
+      if (this.menuSelected != 9) {
+        this.menuSelected = 9;
+        this.$q.localStorage.set("menuselected", 9);
         this.$router.push("/usersystem");
       }
     },
     userBtn() {
       //ปุ่ม สมาชิก ในหน้าเมนู ทำการเปิดหน้า user
-      if (this.menuSelected != 9) {
-        this.menuSelected = 9;
-        this.$q.localStorage.set("menuselected", 9);
+      if (this.menuSelected != 8) {
+        this.menuSelected = 8;
+        this.$q.localStorage.set("menuselected", 8);
         this.$router.push("/user");
       }
     },
     analysisBtn() {
       //ปุ่ม วิเคราะห์การใข้งาน ในหน้าเมนู ทำการเปิดหน้า วิเคราะห์การใช้งาน
-      if (this.menuSelected != 8) {
-        this.menuSelected = 8;
-        this.$q.localStorage.set("menuselected", 8);
+      if (this.menuSelected != 7) {
+        this.menuSelected = 7;
+        this.$q.localStorage.set("menuselected", 7);
         this.$router.push("/analysis");
       }
     },
     adsBtn() {
       //ปุ่ม โฆษณา ในหน้าเมนู ทำการเปิดหน้า โฆษณา
-      if (this.menuSelected != 7) {
-        this.menuSelected = 7;
-        this.$q.localStorage.set("menuselected", 7);
+      if (this.menuSelected != 6) {
+        this.menuSelected = 6;
+        this.$q.localStorage.set("menuselected", 6);
         this.$router.push("/ads");
       }
     },
     pictureBtn() {
       //ปุ่ม แจกวาร์ป ในหน้าเมนู ทำการเปิดหน้า แจกวาร์ป
-      if (this.menuSelected != 6) {
-        this.menuSelected = 6;
-        this.$q.localStorage.set("menuselected", 6);
+      if (this.menuSelected != 5) {
+        this.menuSelected = 5;
+        this.$q.localStorage.set("menuselected", 5);
         this.$router.push("/picture");
       }
     },
     storyBtn() {
       //ปุ่ม แจกวาร์ป ในหน้าเมนู ทำการเปิดหน้า แจกวาร์ป
-      if (this.menuSelected != 5) {
-        this.menuSelected = 5;
-        this.$q.localStorage.set("menuselected", 5);
+      if (this.menuSelected != 4) {
+        this.menuSelected = 4;
+        this.$q.localStorage.set("menuselected", 4);
         this.$router.push("/story");
       }
     },
     cartoonBtn() {
       //ปุ่ม การ์ตูน ในหน้าเมนู ทำการเปิดหน้า การ์ตูน
-      if (this.menuSelected != 4) {
-        this.menuSelected = 4;
-        this.$q.localStorage.set("menuselected", 4);
+      if (this.menuSelected != 3) {
+        this.menuSelected = 3;
+        this.$q.localStorage.set("menuselected", 3);
         this.$router.push("/cartoon");
       }
     },
     movieBtn() {
       //ปุ่ม หนัง ในหน้าเมนู ทำการเปิดหน้า หนัง
-      if (this.menuSelected != 3) {
-        this.menuSelected = 3;
-        this.$q.localStorage.set("menuselected", 3);
+      if (this.menuSelected != 2) {
+        this.menuSelected = 2;
+        this.$q.localStorage.set("menuselected", 2);
         this.$router.push("/movie");
       }
     },
     actressBtn() {
       //ปุ่ม นักแสดงยอดนิยม ในหน้าเมนู ทำการเปิดหน้า นักแสดง
-      if (this.menuSelected != 2) {
-        this.menuSelected = 2;
-        this.$q.localStorage.set("menuselected", 2);
-        this.$router.push("/actress");
-      }
-    },
-    websiteBtn() {
-      //ปุ่ม จัดการหน้าเว็บไซด์ ในหน้าเมนู ทำการเปิดหน้า จัดการหน้าเว็บไซด์
       if (this.menuSelected != 1) {
         this.menuSelected = 1;
         this.$q.localStorage.set("menuselected", 1);
-        this.$router.push("/website");
+        this.$router.push("/actress");
       }
     },
+
     async checkAccess() {
       //ทำการ check สิทธิในการแสดงเมนู
       let roleid = this.$q.localStorage.getItem("roleid");
