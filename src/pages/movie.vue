@@ -98,7 +98,7 @@
         </div>
       </q-card>
     </q-dialog>
-
+    <!-- Dialog หมวดหนัง -->
     <q-dialog v-model="dialogCategory" persistent>
       <q-card
         style="max-width: 1000px;width:800px;height:450px;"
@@ -155,6 +155,54 @@
         </div>
       </q-card>
     </q-dialog>
+    <!-- Dialog เพิ่มหมวดหนัง -->
+    <q-dialog v-model="dialogAddCategory" persistent>
+      <q-card
+        style="max-width: 1000px;width:800px;height:450px;"
+        class="bgdialogbig"
+      >
+        <div class="bginsidebig font24 " style="line-height:100px;">
+          <div class="row">
+            <div class="col-12" align="center">เพิ่มหมวดหนัง</div>
+          </div>
+        </div>
+        <div class="bginsidebig2 font14" style="height:335px;">
+          <div style="width:500px;margin:auto;">
+            <div class="row q-px-md q-pt-md">
+              <div class="col-2 q-pt-md" align="left">รหัสลำดับ</div>
+              <div class="col" style="text-align:left">
+                <q-input v-model="input.catCode" dark dense />
+              </div>
+            </div>
+            <div class="row q-px-md">
+              <div class="col-2 q-pt-md" align="left">ชื่อหมวดหนัง</div>
+              <div class="col" style="text-align:left">
+                <q-input v-model="input.catCode" dark dense />
+              </div>
+            </div>
+            <div class="row  justify-between" style="width:300px; margin:auto;">
+              <div class="q-pt-lg">
+                <q-btn
+                  style="width:120px; height:45px;"
+                  class="outlineblue "
+                  outline
+                  label="ยกเลิก"
+                  @click="confirmDelSystemUser = false"
+                />
+              </div>
+              <div class="q-pt-lg q-pr-md">
+                <q-btn
+                  style="width:120px; height:45px;"
+                  class="bluebtnmd"
+                  label="ตกลง"
+                  @click="delUserSystemReal"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -165,7 +213,11 @@ export default {
     return {
       dialogHowToUpload: false, //เปิดหน้าต่างวิธีการ upload
       dialogCategory: false, //เปิดหมวดหนัง
-      dataCat: [] //หมวดหมู่ของข้อมูล
+      dialogAddCategory: false, //เปิดเพิ่มหมวดหนัง
+      dataCat: [], //หมวดหมู่ของข้อมูล
+      input: {
+        catCode: ""
+      }
     };
   },
   methods: {
@@ -192,6 +244,10 @@ export default {
     },
     addNewCategoryStep2() {
       //เพิ่มหมวดหนัง
+      this.dialogCategory = false;
+      setTimeout(() => {
+        this.dialogAddCategory = true;
+      }, 1000);
     }
   }
 };
