@@ -1,9 +1,35 @@
 <template>
   <div style="max-width:1600px; margin:auto;">
     <div class="contentDiv ">
-      <div class="text-h6 absolute-center" align="center">
-        ถ้าเนื้อคู่ยังไม่ว่าง งั้นขอเนื้อย่างก่อนก็ได้<br />
-        Oops...หน้านี้คิวแรกของการทำเลยนะ....
+        <!-- แถวแรก -->
+        <div class="row q-pt-md justify-between">
+          <div class="row btncustom" @click="openNewPicture">
+              <div class="q-px-md">
+                <q-icon name="fas fa-tags" />
+              </div>
+              <div>ป้ายกำกับ</div>
+          </div>
+          <div class="row">
+            <div class="row btncustom" @click="openNewPicture">
+              <div class="q-px-md">
+                <q-icon name="fas fa-cloud-upload-alt"  />
+              </div>
+              <div>การอัพโหลด</div>
+            </div>
+            <div style="width: 15px;"></div>
+            <div class="row btncustom" @click="openNewPicture">
+              <div class="q-px-md">
+                <q-icon name="fas fa-plus"  />
+              </div>
+            <div>เพิ่มวีดีโอ</div>
+            </div>
+          </div>
+        </div>
+        <!-- ค้นหา -->
+        <div class="row q-pt-md">
+
+        </div>
+
       </div>
     </div>
   </div>

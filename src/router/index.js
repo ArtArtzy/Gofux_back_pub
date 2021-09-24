@@ -32,9 +32,9 @@ export default function(/* { store, ssrContext } */) {
 Vue.mixin({
   data() {
     return {
-      serverpath: "https://www.yaksaconcept.com/gofuxapi/"
+      // serverpath: "https://www.yaksaconcept.com/gofuxapi/"
       // filepath: "https://www.yaksaconcept.com/gofux/",
-      // serverpath: "http://localhost/gofux/"
+      serverpath: "http://localhost/gofux/"
     };
   },
   methods: {

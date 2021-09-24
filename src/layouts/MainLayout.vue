@@ -67,7 +67,7 @@
                 <div class="q-pl-xl fontColor">เล่าเรื่องเสียว</div>
               </div>
 
-              <!-- แจกวาร์ป -->
+              <!-- ภาพโป๊ -->
               <div
                 class="row q-pt-lg   cursor-pointer"
                 v-show="accessMenu.picture != 0"
@@ -208,7 +208,6 @@ export default {
         actress: 1,
         ads: 1,
         cartoon: 1,
-        frontpanel: 1,
         member: 1,
         movie: 1,
         picture: 1,
@@ -313,10 +312,9 @@ export default {
       this.accessMenu.actress = Number(res.data[0].actress);
       this.accessMenu.ads = Number(res.data[0].ads);
       this.accessMenu.cartoon = Number(res.data[0].cartoon);
-      this.accessMenu.frontpanel = Number(res.data[0].frontpanel);
       this.accessMenu.member = Number(res.data[0].member);
       this.accessMenu.movie = Number(res.data[0].movie);
-      this.accessMenu.pictue = Number(res.data[0].picture);
+      this.accessMenu.picture = Number(res.data[0].picture);
       this.accessMenu.stat = Number(res.data[0].stat);
       this.accessMenu.story = Number(res.data[0].story);
       this.accessMenu.system = Number(res.data[0].system);
