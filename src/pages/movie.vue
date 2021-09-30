@@ -32,6 +32,60 @@
           </div>
         </div>
       </div>
+      <!-- แถวสอง -->
+      <div class="row q-pt-md">
+        <div>
+          <q-input
+            v-model="txtsearch"
+            dark
+            outlined
+            rounded
+            placeholder="ค้นหาชื่อเรื่อง"
+            dense
+            style="width:300px;"
+            @keyup.enter="searchData"
+          >
+            <template v-if="txtsearch" v-slot:append>
+              <q-icon
+                name="cancel"
+                @click.stop="resetSearch"
+                class="cursor-pointer"
+              />
+            </template>
+          </q-input>
+        </div>
+      </div>
+
+      <!-- เนื้อหา -->
+
+      <div
+        style="position:relative; overflow:hidden;  width:400px; height:230px;"
+      >
+        <iframe
+          src="https://cdn.jwplayer.com/players/S7JvhJkU-qofscDvY.html"
+          width="100%"
+          height="100%"
+          frameborder="0"
+          scrolling="auto"
+          title="Japanesse Teen Fuck Hard Time Lapsecreampie Slender Body Of A Poor Horse - Pornhub.com"
+          style="position:absolute;"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div
+        style="position:relative; overflow:hidden;width:400px; height:230px;"
+      >
+        <iframe
+          src="https://cdn.jwplayer.com/players/12YTdjoc-qofscDvY.html"
+          width="100%"
+          height="100%"
+          frameborder="0"
+          scrolling="auto"
+          title="[Caribbeancom-022517 381] カリビアンコム 022517-381 宅配ロリ娘 ～ドMイキ天国～ 一之瀬すず Ichinose Suzu ⋆ Jav Guru - Japanese Porn Tube"
+          style="position:absolute;"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
     <!-- Dialog วิธีการอัพโหลด -->
     <q-dialog v-model="dialogHowToUpload" persistent>
@@ -122,7 +176,7 @@
             />
           </div>
         </div>
-        <div class="bginsidebig2 font14" style="height:335px;">
+        <div class="bginsidebig2 font14" style="height:335px;  ">
           <div class="row q-px-md q-pt-md">
             <div class="col-2">รหัสลำดับ</div>
             <div class="col" style="text-align:left">ชื่อหมวดหนัง</div>
@@ -131,26 +185,46 @@
             <div class="col-1">แก้ไข</div>
           </div>
           <div class="q-px-md">
-            <hr />
+            <hr
+              style="  height: 0; border: 0;   border-top: 3px solid #083972; "
+            />
           </div>
-          <div
-            class="row q-px-md q-py-sm"
-            v-for="(item, index) in dataCat"
-            :key="index"
-            :class="[index % 2 ? 'bg-strip' : '']"
-          >
-            <div class="col-2">{{ item.mcat_code }}</div>
-            <div class="col" align="left">{{ item.catName }}</div>
-            <div class="col-2" align="center">
-              <div class="btred" v-show="item.status == 0" @click="offlineBtn">
-                ออฟไลน์
+          <div style="height: 270px; overflow-y:auto;">
+            <div
+              class="row q-px-md q-py-sm"
+              v-for="(item, index) in dataCat"
+              :key="index"
+              :class="[index % 2 ? 'bg-strip' : '']"
+            >
+              <div class="col-2">{{ item.orderid }}</div>
+              <div class="col" align="left">{{ item.catname }}</div>
+              <div class="col-2" align="center">
+                <div
+                  class="btred"
+                  v-show="item.status == 0"
+                  @click="offlineBtn(item.mc_id)"
+                >
+                  ออฟไลน์
+                </div>
+                <div
+                  class="btgreen"
+                  v-show="item.status == 1"
+                  @click="onlineBtn(item.mc_id)"
+                >
+                  ออนไลน์
+                </div>
               </div>
-              <div class="btgreen" v-show="item.status == 1" @click="onlineBtn">
-                ออนไลน์
+              <div class="col-1" align="center">
+                <span class=" cursor-pointer" @click="delCat(item.mc_id)"
+                  ><u>ลบ</u></span
+                >
+              </div>
+              <div class="col-1" align="center">
+                <span class=" cursor-pointer" @click="editCat(item)"
+                  ><u>แก้ไข</u></span
+                >
               </div>
             </div>
-            <div class="col-1" align="center"><u>ลบ</u></div>
-            <div class="col-1" align="center"><u>แก้ไข</u></div>
           </div>
         </div>
       </q-card>
@@ -158,7 +232,7 @@
     <!-- Dialog เพิ่มหมวดหนัง -->
     <q-dialog v-model="dialogAddCategory" persistent>
       <q-card
-        style="max-width: 1000px;width:800px;height:450px;"
+        style="max-width: 1000px;width:800px;height:330px;"
         class="bgdialogbig"
       >
         <div class="bginsidebig font24 " style="line-height:100px;">
@@ -166,18 +240,18 @@
             <div class="col-12" align="center">เพิ่มหมวดหนัง</div>
           </div>
         </div>
-        <div class="bginsidebig2 font14" style="height:335px;">
+        <div class="bginsidebig2 font14" style="height:215px;">
           <div style="width:500px;margin:auto;">
             <div class="row q-px-md q-pt-md">
               <div class="col-2 q-pt-md" align="left">รหัสลำดับ</div>
-              <div class="col" style="text-align:left">
-                <q-input v-model="input.catCode" dark dense />
+              <div class="col q-pl-md" style="text-align:left">
+                <q-input v-model="input.catCode" dark dense type="number" />
               </div>
             </div>
             <div class="row q-px-md">
               <div class="col-2 q-pt-md" align="left">ชื่อหมวดหนัง</div>
-              <div class="col" style="text-align:left">
-                <q-input v-model="input.catCode" dark dense />
+              <div class="col q-pl-md" style="text-align:left">
+                <q-input v-model="input.catName" dark dense />
               </div>
             </div>
             <div class="row  justify-between" style="width:300px; margin:auto;">
@@ -187,7 +261,10 @@
                   class="outlineblue "
                   outline
                   label="ยกเลิก"
-                  @click="confirmDelSystemUser = false"
+                  @click="
+                    dialogAddCategory = false;
+                    dialogCategory = true;
+                  "
                 />
               </div>
               <div class="q-pt-lg q-pr-md">
@@ -195,7 +272,58 @@
                   style="width:120px; height:45px;"
                   class="bluebtnmd"
                   label="ตกลง"
-                  @click="delUserSystemReal"
+                  @click="addNewCatBtn()"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+    </q-dialog>
+    <!-- Dialog แก้ไขหมวดหนัง -->
+    <q-dialog v-model="dialogEditCategory" persistent>
+      <q-card
+        style="max-width: 1000px;width:800px;height:330px;"
+        class="bgdialogbig"
+      >
+        <div class="bginsidebig font24 " style="line-height:100px;">
+          <div class="row">
+            <div class="col-12" align="center">แก้ไขหมวดหนัง</div>
+          </div>
+        </div>
+        <div class="bginsidebig2 font14" style="height:215px;">
+          <div style="width:500px;margin:auto;">
+            <div class="row q-px-md q-pt-md">
+              <div class="col-2 q-pt-md" align="left">รหัสลำดับ</div>
+              <div class="col q-pl-md" style="text-align:left">
+                <q-input v-model="input.catCode" dark dense type="number" />
+              </div>
+            </div>
+            <div class="row q-px-md">
+              <div class="col-2 q-pt-md" align="left">ชื่อหมวดหนัง</div>
+              <div class="col q-pl-md" style="text-align:left">
+                <q-input v-model="input.catName" dark dense />
+              </div>
+            </div>
+            <div class="row  justify-between" style="width:300px; margin:auto;">
+              <div class="q-pt-lg">
+                <q-btn
+                  style="width:120px; height:45px;"
+                  class="outlineblue "
+                  outline
+                  label="ยกเลิก"
+                  @click="
+                    dialogEditCategory = false;
+                    dialogCategory = true;
+                  "
+                />
+              </div>
+              <div class="q-pt-lg q-pr-md">
+                <q-btn
+                  style="width:120px; height:45px;"
+                  class="bluebtnmd"
+                  label="ตกลง"
+                  @click="editCatBtn()"
                 />
               </div>
             </div>
@@ -214,13 +342,24 @@ export default {
       dialogHowToUpload: false, //เปิดหน้าต่างวิธีการ upload
       dialogCategory: false, //เปิดหมวดหนัง
       dialogAddCategory: false, //เปิดเพิ่มหมวดหนัง
+      dialogEditCategory: false, //แก้ไขหมวดหนัง
       dataCat: [], //หมวดหมู่ของข้อมูล
       input: {
-        catCode: ""
-      }
+        catCode: "",
+        catName: ""
+      }, //เพิ่มหมวดหนัง
+      txtsearch: "", //ข้อมูลการค้นหา
+      editCatId: 0 //รหัสสำหรับแก้ไข cat
     };
   },
   methods: {
+    searchData() {
+      //ค้นหาข้อมูล
+    },
+    resetSearch() {
+      //ยกเลิกการค้นหา
+      this.txtsearch = "";
+    },
     openTagSystem() {
       //เปิดหน้าต่าง tag
       console.log("open tag system");
@@ -241,13 +380,87 @@ export default {
       for (let i = 0; i < res.data.length; i++) {
         this.dataCat.push(res.data[i]);
       }
+      this.dataCat.sort((a, b) => a.orderid - b.orderid);
     },
     addNewCategoryStep2() {
       //เพิ่มหมวดหนัง
       this.dialogCategory = false;
-      setTimeout(() => {
-        this.dialogAddCategory = true;
-      }, 1000);
+      this.input.catCode = "";
+      this.input.catName = "";
+
+      this.dialogAddCategory = true;
+    },
+    async addNewCatBtn() {
+      //บันทึกเพิ่มหมวดหนัง
+      //Check ว่ามีการใส่ค่าถูกต้องหรือไหม
+      if (this.input.catCode.length > 0 && this.input.catName.length > 0) {
+        let data = {
+          orderid: this.input.catCode,
+          catName: this.input.catName
+        };
+        let url = this.serverpath + "bo_movie_add_cat.php";
+        let res = await axios.post(url, JSON.stringify(data));
+        if (res.data == "finish") {
+          this.greenNotify("บันทึกข้อมูลเสร็จสิ้น");
+          this.dialogAddCategory = false;
+          this.loadcat();
+          this.dialogCategory = true;
+        } else {
+          this.redNotify(res.data);
+        }
+      } else {
+        this.redNotify("กรุณาใส่ข้อมูลให้ครบถ้วน");
+      }
+    },
+    async offlineBtn(id) {
+      //ปุ่ม offline หมวดหนัง
+      let data = {
+        status: 1,
+        id: id
+      };
+      let url = this.serverpath + "bo_movie_cat_online.php";
+      let res = await axios.post(url, JSON.stringify(data));
+      this.loadcat();
+    },
+    async onlineBtn(id) {
+      //ปุ่ม online หมวดหนัง
+      let data = {
+        status: 0,
+        id: id
+      };
+      let url = this.serverpath + "bo_movie_cat_online.php";
+      let res = await axios.post(url, JSON.stringify(data));
+      this.loadcat();
+    },
+    async delCat(id) {
+      //ปุ่มลบหมวดหนัง
+      let data = {
+        id: id
+      };
+      let url = this.serverpath + "bo_movie_cat_del.php";
+      let res = await axios.post(url, JSON.stringify(data));
+      this.greenNotify("ลบข้อมูลเสร็จสิ้น");
+      this.loadcat();
+    },
+    editCat(item) {
+      this.input.catCode = item.orderid;
+      this.input.catName = item.catname;
+      this.dialogCategory = false;
+      this.editCatId = item.mc_id;
+      this.dialogEditCategory = true;
+    },
+    async editCatBtn() {
+      //ปุ่มแก้ไขหมวดหนัง
+      let data = {
+        orderid: this.input.catCode,
+        catName: this.input.catName,
+        id: this.editCatId
+      };
+      let url = this.serverpath + "bo_movie_cat_edit.php";
+      let res = await axios.post(url, JSON.stringify(data));
+      this.loadcat();
+      this.dialogEditCategory = false;
+      this.dialogCategory = true;
     }
   }
 };
