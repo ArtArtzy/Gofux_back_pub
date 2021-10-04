@@ -34,6 +34,7 @@
       </div>
       <!-- แถวสอง -->
       <div class="row q-pt-md">
+        <!-- ค้นหาชื่อเรื่อง -->
         <div>
           <q-input
             v-model="txtsearch"
@@ -54,37 +55,96 @@
             </template>
           </q-input>
         </div>
+        <!-- หมวดหมู่ -->
+        <div class="row">
+          <div>หมวดหมู่</div>
+          <div>
+            <q-select
+              dark
+              v-model="catSelected"
+              :options="catOption"
+              style="width:170px;"
+              rounded
+              outlined
+              dense
+              dark
+              emit-value
+              map-options
+            ></q-select>
+          </div>
+          <div>
+            <q-icon name="fas fa-edit" color="white" />
+          </div>
+        </div>
       </div>
 
       <!-- เนื้อหา -->
 
-      <div
+      <!-- <div
         style="position:relative; overflow:hidden;  width:400px; height:230px;"
       >
         <iframe
-          src="https://cdn.jwplayer.com/players/S7JvhJkU-qofscDvY.html"
+          src="https://cdn.jwplayer.com/players/ieh8jaRp-qofscDvY.html"
           width="100%"
           height="100%"
           frameborder="0"
           scrolling="auto"
-          title="Japanesse Teen Fuck Hard Time Lapsecreampie Slender Body Of A Poor Horse - Pornhub.com"
+          title="AKB48 Team TP / Only today"
           style="position:absolute;"
           allowfullscreen
         ></iframe>
-      </div>
-      <div
-        style="position:relative; overflow:hidden;width:400px; height:230px;"
+      </div> -->
+      <!-- <div
+        style="position:relative; overflow:hidden;  width:400px; height:230px;"
       >
         <iframe
-          src="https://cdn.jwplayer.com/players/12YTdjoc-qofscDvY.html"
+          src="https://cdn.jwplayer.com/players/TJXPtV7O-qofscDvY.html.html"
           width="100%"
           height="100%"
           frameborder="0"
           scrolling="auto"
-          title="[Caribbeancom-022517 381] カリビアンコム 022517-381 宅配ロリ娘 ～ドMイキ天国～ 一之瀬すず Ichinose Suzu ⋆ Jav Guru - Japanese Porn Tube"
+          title="BNK48 Only today"
           style="position:absolute;"
           allowfullscreen
         ></iframe>
+      </div> -->
+      <!-- <div
+        style="position:relative; overflow:hidden; width:800px; height:460px;"
+      >
+        <iframe
+          src="https://cdn.jwplayer.com/players/ieh8jaRp-LnrZZUJA.html"
+          width="100%"
+          height="100%"
+          frameborder="0"
+          scrolling="auto"
+          title="Akb48 Team Tp｜《only Today》official Mv"
+          style="position:absolute;"
+          allowfullscreen
+        ></iframe>
+      </div> -->
+      <!-- <div style="position:relative; overflow:hidden; ">
+        <iframe
+          src="https://cdn.jwplayer.com/players/38g3LzJQ-LnrZZUJA.html"
+          width="50%"
+          height="50%"
+          frameborder="0"
+          scrolling="auto"
+          title="Akb48 Team Tp｜《only Today》official Mv"
+          style="position:absolute;"
+          allowfullscreen
+        ></iframe>
+      </div> -->
+      <!-- <div class="frameVDO">
+        <iframe
+          src="https://content.jwplatform.com/players/38g3LzJQ-LnrZZUJA.html"
+          frameborder="0"
+          scrolling="auto"
+          allowfullscreen
+          style="position:absolute;"
+        ></iframe>
+      </div> -->
+      <div style="width:300px;height:300px;">
+        <div id="myElement"></div>
       </div>
     </div>
     <!-- Dialog วิธีการอัพโหลด -->
@@ -339,6 +399,8 @@ import axios from "axios";
 export default {
   data() {
     return {
+      catSelected: "", //หมวดที่เลือก
+      catOption: [], //ตัวเลือกหมวด
       dialogHowToUpload: false, //เปิดหน้าต่างวิธีการ upload
       dialogCategory: false, //เปิดหมวดหนัง
       dialogAddCategory: false, //เปิดเพิ่มหมวดหนัง
@@ -381,6 +443,15 @@ export default {
         this.dataCat.push(res.data[i]);
       }
       this.dataCat.sort((a, b) => a.orderid - b.orderid);
+      this.catOption = [];
+      this.dataCat.forEach(x => {
+        let temp = {
+          value: x.mc_id,
+          label: x.catname
+        };
+        this.catOption.push(temp);
+      });
+      this.catSelected = this.catOption[0].value;
     },
     addNewCategoryStep2() {
       //เพิ่มหมวดหนัง
@@ -443,6 +514,7 @@ export default {
       this.loadcat();
     },
     editCat(item) {
+      //โหลดหน้าแก้ไข cat
       this.input.catCode = item.orderid;
       this.input.catName = item.catname;
       this.dialogCategory = false;
@@ -462,6 +534,19 @@ export default {
       this.dialogEditCategory = false;
       this.dialogCategory = true;
     }
+  },
+  mounted() {
+    this.loadcat();
+    jwplayer("myElement").setup({
+      playlist: [
+        {
+          file: "https://cdn.jwplayer.com/manifests/ieh8jaRp.m3u8",
+          responsive: true,
+          width: "100%",
+          aspectratio: "16:9"
+        }
+      ]
+    });
   }
 };
 </script>
@@ -484,5 +569,23 @@ export default {
   text-align: center;
   border-radius: 50px;
   cursor: pointer;
+}
+.frameVDO {
+  position: relative;
+  display: block;
+  width: 60%; /* width of iframe wrapper */
+  height: 0;
+  margin: auto;
+  padding: 0% 0% 56.25%; /* 16:9 ratio */
+  overflow: hidden;
+}
+.frameVDO iframe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 </style>
