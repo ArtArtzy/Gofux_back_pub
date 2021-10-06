@@ -134,15 +134,15 @@
           allowfullscreen
         ></iframe>
       </div> -->
-      <!-- <div class="frameVDO">
+      <div class="frameVDO">
         <iframe
-          src="https://content.jwplatform.com/players/38g3LzJQ-LnrZZUJA.html"
+          src="https://cdn.jwplayer.com/players/38g3LzJQ-qofscDvY.html?exp=1633465563&sig=b44f1ed5194617465d4c93266bd6f842"
           frameborder="0"
           scrolling="auto"
           allowfullscreen
           style="position:absolute;"
         ></iframe>
-      </div> -->
+      </div>
       <div style="width:300px;height:300px;">
         <div id="myElement"></div>
       </div>
@@ -541,6 +541,7 @@ export default {
       playlist: [
         {
           file: "https://cdn.jwplayer.com/manifests/ieh8jaRp.m3u8",
+          image: "https://yaksaconcept.com/gofuxapi/picture/p001/00.jpg",
           responsive: true,
           width: "100%",
           aspectratio: "16:9"
@@ -572,20 +573,18 @@ export default {
 }
 .frameVDO {
   position: relative;
-  display: block;
-  width: 60%; /* width of iframe wrapper */
-  height: 0;
-  margin: auto;
-  padding: 0% 0% 56.25%; /* 16:9 ratio */
   overflow: hidden;
+  width: 50%;
+  // height: calc(50%);
+  padding-top: 28.125%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
 }
 .frameVDO iframe {
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   height: 100%;
-  border: 0;
 }
 </style>
