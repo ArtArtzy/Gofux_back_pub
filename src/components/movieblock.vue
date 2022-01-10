@@ -1,10 +1,9 @@
 <template>
-  <div>
-    helloooooo
-  </div>
+  <div>123</div>
 </template>
 
 <script>
+import axios from "axios";
 export default {};
 </script>
 
