@@ -167,7 +167,7 @@
       <!-- Dialog ตัวอย่าง -->
       <q-dialog v-model="dialogSample" persistent>
         <q-card
-          style="max-width: 1000px;width:800px;height:650px;"
+          style="max-width: 1000px;width:800px;height:100vh;"
           class="bgdialogbig"
         >
           <div class="bginsidebig font18 " style="line-height:50px;">
@@ -188,10 +188,14 @@
           </div>
           <div
             class="bginsidebig2 font14"
-            style="height:535px; overflow-y:scroll"
+            style="height:calc(100vh - 165px); overflow-y:scroll"
           >
             <div v-for="index in pageSample" :key="index">
               <img
+                :src="fullPicturePath(pathSample, index)"
+                style="width:60%"
+              />
+              <!-- <img
                 :src="
                   pathSample +
                     '0' +
@@ -213,7 +217,7 @@
                 alt=""
                 style="width:60%"
                 v-if="index > 9"
-              />
+              /> -->
             </div>
           </div>
         </q-card>
@@ -221,7 +225,7 @@
       <!-- Dialog วิธีการอัพโหลด -->
       <q-dialog v-model="dialogHowToUpload" persistent>
         <q-card
-          style="max-width: 1000px;width:800px;height:450px;"
+          style="max-width: 1000px;width:800px;height:100vh;"
           class="bgdialogbig"
         >
           <div class="bginsidebig font24 " style="line-height:100px;">
@@ -236,11 +240,11 @@
               </div>
             </div>
           </div>
-          <div class="bginsidebig2 font14" style="height:335px;">
+          <div class="bginsidebig2 font14" style="height:calc(100vh - 163px);">
             <div
               align="left"
               class="q-pa-md"
-              style="height:335px; overflow:auto;"
+              style="height:calc(100vh - 163px); overflow:auto;"
             >
               <div class="font20">การติดตั้งโปรแกรมเพื่อทำการอัพโหลดข้อมูล</div>
               <div>
@@ -668,7 +672,9 @@
             dialogAddNewPicture ||
             dialogSetGroup ||
             dialogConfirmDel ||
-            dialogConfirmEdit
+            dialogConfirmEdit ||
+            dialogSample ||
+            dialogEditPicture
         "
       ></div>
     </div>
@@ -743,6 +749,27 @@ export default {
     };
   },
   methods: {
+    //return full path name ของ cartoon
+    fullPicturePath(pathSample, index) {
+      let fileName = "";
+      if (index <= 9) {
+        fileName = "000" + index;
+      } else if (index <= 99) {
+        fileName = "00" + index;
+      } else if (index <= 999) {
+        fileName = "0" + index;
+      } else {
+        fileName = index;
+      }
+      return (
+        pathSample +
+        fileName +
+        ".jpg?x=" +
+        (Math.floor(Math.random() * 999) + 100)
+      );
+    },
+    //************** หน้าหลัก */
+    //คำนวนหน้าที่มีทั้งหมด
     async calPage() {
       //คำนวนหาหน้าทั้งหมดที่ต้องใช้
       this.pageOptions = [];

@@ -281,10 +281,10 @@
       <!-- Dialog วิธีการอัพโหลด -->
       <q-dialog v-model="dialogHowToUpload" persistent>
         <q-card
-          style="max-width: 1000px;width:800px;height:450px;"
+          style="max-width: 1000px;width:800px;height:100vh;"
           class="bgdialogbig"
         >
-          <div class="bginsidebig font24 " style="line-height:50px;">
+          <div class="bginsidebig font24 " style="line-height:100px;">
             <div class="row">
               <div class="col-1"></div>
               <div class="col-10" align="center">วิธีการอัพโหลด</div>
@@ -295,36 +295,12 @@
                 x
               </div>
             </div>
-
-            <div class="row font14 justify-center">
-              <div
-                class="unselectedBtn q-mx-md"
-                v-show="!uploadWindows"
-                @click="showUploadWindows"
-              >
-                Windows
-              </div>
-              <div class="selectedBtn q-mx-md" v-show="uploadWindows">
-                Windows
-              </div>
-              <div
-                class="unselectedBtn q-mx-md"
-                v-show="uploadWindows"
-                @click="showUploadMacs"
-              >
-                MacOS
-              </div>
-              <div class="selectedBtn q-mx-md" v-show="!uploadWindows">
-                MacOS
-              </div>
-            </div>
           </div>
-          <div class="bginsidebig2 font14" style="height:335px;">
+          <div class="bginsidebig2 font14" style="height:calc(100vh - 163px);">
             <div
-              v-show="uploadWindows"
               align="left"
               class="q-pa-md"
-              style="height:335px; overflow:auto;"
+              style="height:calc(100vh - 180px); overflow:auto;"
             >
               <div class="font20">การติดตั้งโปรแกรมเพื่อทำการอัพโหลดข้อมูล</div>
               <div>
@@ -364,21 +340,13 @@
                 ไฟล์ตัวหนังสือการ์ตูนจะเริ่มจากไฟล์ 01.jpg โดยการรันเลขไปเรื่อยๆ
               </div>
             </div>
-            <div
-              v-show="!uploadWindows"
-              align="left"
-              class="q-pa-md"
-              style="height:335px; overflow:auto;"
-            >
-              ไปหาวิธีทำก่อนนะ!!!
-            </div>
           </div>
         </q-card>
       </q-dialog>
       <!-- Dialog ตัวอย่าง -->
       <q-dialog v-model="dialogSample" persistent>
         <q-card
-          style="max-width: 1000px;width:800px;height:650px;"
+          style="max-width: 1000px;width:800px;height:100vh;"
           class="bgdialogbig"
         >
           <div class="bginsidebig font18 " style="line-height:50px;">
@@ -399,31 +367,12 @@
           </div>
           <div
             class="bginsidebig2 font14"
-            style="height:535px; overflow-y:scroll"
+            style="height:calc(100vh - 163px); overflow-y:scroll"
           >
             <div v-for="index in pageSample" :key="index">
               <img
-                :src="
-                  pathSample +
-                    '0' +
-                    index +
-                    '.jpg?x=' +
-                    (Math.floor(Math.random() * 999) + 100)
-                "
-                alt=""
+                :src="fullPicturePath(pathSample, index)"
                 style="width:80%"
-                v-if="index <= 9"
-              />
-              <img
-                :src="
-                  pathSample +
-                    index +
-                    '.jpg?x=' +
-                    (Math.floor(Math.random() * 999) + 100)
-                "
-                alt=""
-                style="width:80%"
-                v-if="index > 9"
               />
             </div>
           </div>
@@ -432,7 +381,12 @@
       <!-- bg สีเข้ม -->
       <div
         class="fullscreen bg-backdrop"
-        v-show="dialogAddNewCartoon || dialogHowToUpload || dialogEditCartoon"
+        v-show="
+          dialogAddNewCartoon ||
+            dialogHowToUpload ||
+            dialogEditCartoon ||
+            dialogSample
+        "
       ></div>
     </div>
   </div>
@@ -478,6 +432,117 @@ export default {
     };
   },
   methods: {
+    //***** lib กลาง */
+    //return full path name ของ cartoon
+    fullPicturePath(pathSample, index) {
+      let fileName = "";
+      if (index <= 9) {
+        fileName = "000" + index;
+      } else if (index <= 99) {
+        fileName = "00" + index;
+      } else if (index <= 999) {
+        fileName = "0" + index;
+      } else {
+        fileName = index;
+      }
+      return (
+        pathSample +
+        fileName +
+        ".jpg?x=" +
+        (Math.floor(Math.random() * 999) + 100)
+      );
+    },
+    //หมุน loading timer 0.5 s
+    showLoading() {
+      this.$q.loading.show();
+      this.timer = setTimeout(() => {
+        this.$q.loading.hide();
+        this.timer = void 0;
+      }, 500);
+    },
+    //โหลด Folder ใน cartoon
+    async loadFolderList() {
+      this.optionFolderList = [];
+      let url = this.serverpath + "bo_cartoon_list_folder.php";
+      let res = await axios.get(url);
+      res.data.forEach(x => {
+        this.optionFolderList.push(x);
+      });
+      this.input.folder = this.optionFolderList[0];
+    },
+    //สั่ง refresh foloder ติด loading
+    refreshFolderListBtn() {
+      this.showLoading();
+      this.loadFolderList();
+    },
+    //โหลด Folder ที่เก็บการ์ตูน
+    async loadfolder() {
+      let url = this.serverpath + "bo_cartoon_list_folder.php";
+      let res = await axios.get(url);
+      this.folderList = res.data;
+    },
+    //load ข้อมูลการ์ตูน
+    async loadCartoon() {
+      this.cartoonData = [];
+      let startTime = 1630256400000; // 1-July-2021
+      let currentTime = new Date().getTime();
+      let diffTime = currentTime - startTime;
+      let diffWeek = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
+      let temp = {
+        diffWeek: diffWeek
+      };
+      let url = this.serverpath + "bo_cartoon_list.php";
+      let res = await axios.post(url, JSON.stringify(temp));
+      for (let i = 0; i < res.data.length; i++) {
+        this.cartoonData.push(res.data[i]);
+      }
+      this.cartoonListShowInPage();
+    },
+    // ทำข้อมูลสำหรับแสดงในหน้านั้น
+    cartoonListShowInPage() {
+      this.cartoonList = [];
+
+      let tempL = this.cartoonList.length;
+      //ทำการ sort ข้อมูล
+      if (this.sortOrder == "ยอดวิวรวม") {
+        this.cartoonData.sort(
+          (a, b) => Number(b.statview) - Number(a.statview)
+        );
+      } else if (this.sortOrder == "ยอดวิวต่อสัปดาห์") {
+        this.cartoonData.sort((a, b) => {
+          return Number(b.statweek) - Number(a.statweek);
+        });
+      } else {
+        this.cartoonData.sort(
+          (a, b) => Number(a.ct_timestamp) - Number(b.ct_timestamp)
+        );
+      }
+
+      //ทำการเลือกข้อมูลในหน้านั้น
+      this.startCartoon = (this.page - 1) * 10 + 1;
+      this.endCartoon = this.page * 10;
+      if (this.cartoonData.length < this.endCartoon) {
+        this.endCartoon = this.cartoonData.length;
+      }
+
+      for (let i = this.startCartoon - 1; i < this.endCartoon; i++) {
+        this.cartoonList.push(this.cartoonData[i]);
+      }
+    },
+
+    //***** หน้าหลัก */
+    //คำนวนหาหน้าทั้งหมดที่ต้องใช้
+    async calPage() {
+      this.pageOptions = [];
+      let url = this.serverpath + "bo_cartoon_no_data.php";
+      let res = await axios.get(url);
+      this.pageMax = Math.ceil(res.data / 10);
+      for (let i = 1; i <= this.pageMax; i++) {
+        this.pageOptions.push(i);
+      }
+      this.page = this.currentPage;
+    },
+    //เปลี่ยรูปแบบการเรียง
     changeOrder() {
       //เปลี่ยนการเรียง
       if (this.txtsearch == "") {
@@ -508,6 +573,7 @@ export default {
         }
       }
     },
+    //เปลี่ยนหน้า
     changePage() {
       //เปลี่ยนหน้า
 
@@ -539,6 +605,7 @@ export default {
         }
       }
     },
+    //ล้างการค้นหา
     resetSearch() {
       //ยกเลิกการค้นหา
       this.txtsearch = "";
@@ -547,6 +614,7 @@ export default {
       this.sortOrder = "ยอดวิวรวม";
       this.cartoonListShowInPage();
     },
+    //ค้นหาข้อมูล
     searchData() {
       //เมื่อกดปุ่มค้นหา
       this.page = 1;
@@ -565,8 +633,22 @@ export default {
       }
       this.changePage();
     },
+    //ปุ่มเพิ่มเรื่องใหม่
+    async openNewCartoon() {
+      //เปิดหน้าต่างเพิ่มเรื่องใหม่
+      await this.loadFolderList();
+      this.dialogAddNewCartoon = true;
+      this.input.title = "";
+    },
+    // เปิดหน้าต่างการอัพโหลด
+    showUploadWindows() {
+      //ปุ่มเลือก Windows ในวิธีอัพโหลด
+      this.uploadWindows = true;
+    },
+
+    //******ค่าที่ Return จาก cartoonblock component
+    //แสดงหน้าตัวอย่างการ์ตูน
     async showSambleDia(id) {
-      //แสดงหน้าตัวอย่างการ์ตูน
       this.dialogSample = true;
       let showResult = this.cartoonData.filter(x => x.ct_id == id);
       this.titleSample = showResult[0].ct_title;
@@ -579,8 +661,8 @@ export default {
       this.pathSample =
         this.serverpath + "cartoon/" + showResult[0].ct_folder + "/";
     },
+    //เปิดหน้าต่างแก้ไขข้อมูล
     editDia(id) {
-      //เปิดหน้าต่างแก้ไขข้อมูล
       this.dialogEditCartoon = true;
       this.editID = id;
       this.refreshFolderListBtn();
@@ -588,8 +670,10 @@ export default {
       this.input.title = dataShow[0].ct_title;
       this.optionFolderList.unshift(dataShow[0].ct_folder);
     },
+
+    //*****หน้าต่างแก้ไข */
+    //บันทึกหน้าแก้ไข
     async editCartoonBtn() {
-      // บันทึกแก้ไข;
       //Check ว่าใส่ข้อมูลครบถ้วน
       if (this.input.title.length == 0 || this.input.folder.length == 0) {
         this.redNotify("กรุณาใส่ข้อมูลให้ครบถ้วน");
@@ -610,48 +694,8 @@ export default {
       //ทำการอัพเดท List
       this.loadCartoon();
     },
-    async openNewCartoon() {
-      //เปิดหน้าต่างเพิ่มเรื่องใหม่
-      await this.loadFolderList();
-      this.dialogAddNewCartoon = true;
-      this.input.title = "";
-    },
-    showUploadWindows() {
-      //ปุ่มเลือก Windows ในวิธีอัพโหลด
-      this.uploadWindows = true;
-    },
-    showUploadMacs() {
-      //ปุ่มเลือก MacOS ในวิธีอัพโหลด
-      this.uploadWindows = false;
-    },
-    async OpenDialogAddNewCartoon() {
-      //กดปุ่มเพิ่มเรื่องใหม่
-      await this.loadFolderList();
-      this.dialogAddNewCartoon = true;
-    },
-    async loadFolderList() {
-      //โหลด Folder ใน cartoon
-      this.optionFolderList = [];
-      let url = this.serverpath + "bo_cartoon_list_folder.php";
-      let res = await axios.get(url);
-      res.data.forEach(x => {
-        this.optionFolderList.push(x);
-      });
-      this.input.folder = this.optionFolderList[0];
-    },
-    refreshFolderListBtn() {
-      // this.dialogAddNewCartoon = false;
-      this.showLoading();
-      this.loadFolderList();
-    },
-    showLoading() {
-      this.$q.loading.show();
-      // hiding in 0.5s
-      this.timer = setTimeout(() => {
-        this.$q.loading.hide();
-        this.timer = void 0;
-      }, 500);
-    },
+
+    //*****หน้าต่างเพิ่มการ์ตูน */
     async addNewCartoonBtn() {
       //บันทึกในหน้าเพิ่มเรื่องใหม่
       //Check ว่ามีการใส่ค่าหรือไหม
@@ -670,71 +714,6 @@ export default {
       this.dialogAddNewCartoon = false;
       this.calPage();
       this.loadCartoon();
-    },
-    async calPage() {
-      //คำนวนหาหน้าทั้งหมดที่ต้องใช้
-      this.pageOptions = [];
-      let url = this.serverpath + "bo_cartoon_no_data.php";
-      let res = await axios.get(url);
-      this.pageMax = Math.ceil(res.data / 10);
-      for (let i = 1; i <= this.pageMax; i++) {
-        this.pageOptions.push(i);
-      }
-      this.page = this.currentPage;
-    },
-    async loadfolder() {
-      //โหลด Folder ที่เก็บการ์ตูน
-      let url = this.serverpath + "bo_cartoon_list_folder.php";
-      let res = await axios.get(url);
-      this.folderList = res.data;
-    },
-    async loadCartoon() {
-      //load ข้อมูลการ์ตูน
-      this.cartoonData = [];
-      let startTime = 1630256400000; // 1-July-2021
-      let currentTime = new Date().getTime();
-      let diffTime = currentTime - startTime;
-      let diffWeek = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
-      let temp = {
-        diffWeek: diffWeek
-      };
-      let url = this.serverpath + "bo_cartoon_list.php";
-      let res = await axios.post(url, JSON.stringify(temp));
-      for (let i = 0; i < res.data.length; i++) {
-        this.cartoonData.push(res.data[i]);
-      }
-      this.cartoonListShowInPage();
-    },
-    cartoonListShowInPage() {
-      // ทำข้อมูลสำหรับแสดงในหน้านั้น
-      this.cartoonList = [];
-
-      let tempL = this.cartoonList.length;
-      //ทำการ sort ข้อมูล
-      if (this.sortOrder == "ยอดวิวรวม") {
-        this.cartoonData.sort(
-          (a, b) => Number(b.statview) - Number(a.statview)
-        );
-      } else if (this.sortOrder == "ยอดวิวต่อสัปดาห์") {
-        this.cartoonData.sort((a, b) => {
-          return Number(b.statweek) - Number(a.statweek);
-        });
-      } else {
-        this.cartoonData.sort(
-          (a, b) => Number(a.ct_timestamp) - Number(b.ct_timestamp)
-        );
-      }
-
-      //ทำการเลือกข้อมูลในหน้านั้น
-      this.startCartoon = (this.page - 1) * 10 + 1;
-      this.endCartoon = this.page * 10;
-      if (this.cartoonData.length < this.endCartoon) {
-        this.endCartoon = this.cartoonData.length;
-      }
-
-      for (let i = this.startCartoon - 1; i < this.endCartoon; i++) {
-        this.cartoonList.push(this.cartoonData[i]);
-      }
     }
   },
 

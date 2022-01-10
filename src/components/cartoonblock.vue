@@ -54,7 +54,7 @@ export default {
           this.serverpath +
           "cartoon/" +
           this.data["ct_folder"] +
-          "/00.jpg?x=" +
+          "/0000.jpg?x=" +
           Math.floor(Math.random() * 999) +
           100;
         this.title = this.data["ct_title"];
@@ -97,7 +97,7 @@ export default {
         this.serverpath +
         "cartoon/" +
         newData["ct_folder"] +
-        "/00.jpg?x=" +
+        "/0000.jpg?x=" +
         Math.floor(Math.random() * 999) +
         100;
       this.viewPerWeek = newData["statweek"];

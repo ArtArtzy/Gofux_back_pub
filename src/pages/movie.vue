@@ -1,14 +1,9 @@
 <template>
   <div style="max-width:1600px; margin:auto;">
+    <!-- หน้าหลัก -->
     <div class="contentDiv ">
       <!-- แถวแรก -->
-      <div class="row q-pt-md justify-between">
-        <div class="row btncustom" @click="openTagSystem">
-          <div class="q-px-md">
-            <q-icon name="fas fa-tags" />
-          </div>
-          <div>ป้ายกำกับ</div>
-        </div>
+      <div class="row q-pt-md justify-end">
         <div class="row">
           <div class="row btncustom" @click="dialogHowToUpload = true">
             <div class="q-px-md">
@@ -35,7 +30,7 @@
       <!-- แถวสอง -->
       <div class="row q-pt-md">
         <!-- ค้นหาชื่อเรื่อง -->
-        <div>
+        <div class="col">
           <q-input
             v-model="txtsearch"
             dark
@@ -43,7 +38,7 @@
             rounded
             placeholder="ค้นหาชื่อเรื่อง"
             dense
-            style="width:300px;"
+            style="width:400px;"
             @keyup.enter="searchData"
           >
             <template v-if="txtsearch" v-slot:append>
@@ -56,14 +51,14 @@
           </q-input>
         </div>
         <!-- หมวดหมู่ -->
-        <div class="row">
-          <div>หมวดหมู่</div>
+        <div class="row" style="width:350px">
+          <div class="q-mt-sm q-mx-md">หมวดหมู่</div>
           <div>
             <q-select
               dark
               v-model="catSelected"
               :options="catOption"
-              style="width:170px;"
+              style="width:200px;"
               rounded
               outlined
               dense
@@ -72,79 +67,39 @@
               map-options
             ></q-select>
           </div>
+        </div>
+
+        <div class="row">
+          <div class="q-mt-sm q-mx-md">เรียง</div>
           <div>
-            <q-icon name="fas fa-edit" color="white" />
+            <q-select
+              dark
+              v-model="sortOrder"
+              :options="options"
+              style="width:200px;"
+              rounded
+              outlined
+              dense
+              @input="changeOrder()"
+            ></q-select>
           </div>
         </div>
-      </div>
-
-      <!-- เนื้อหา -->
-
-      <!-- <div
-        style="position:relative; overflow:hidden;  width:400px; height:230px;"
-      >
-        <iframe
-          src="https://cdn.jwplayer.com/players/ieh8jaRp-qofscDvY.html"
-          width="100%"
-          height="100%"
-          frameborder="0"
-          scrolling="auto"
-          title="AKB48 Team TP / Only today"
-          style="position:absolute;"
-          allowfullscreen
-        ></iframe>
-      </div> -->
-      <!-- <div
-        style="position:relative; overflow:hidden;  width:400px; height:230px;"
-      >
-        <iframe
-          src="https://cdn.jwplayer.com/players/TJXPtV7O-qofscDvY.html.html"
-          width="100%"
-          height="100%"
-          frameborder="0"
-          scrolling="auto"
-          title="BNK48 Only today"
-          style="position:absolute;"
-          allowfullscreen
-        ></iframe>
-      </div> -->
-      <!-- <div
-        style="position:relative; overflow:hidden; width:800px; height:460px;"
-      >
-        <iframe
-          src="https://cdn.jwplayer.com/players/ieh8jaRp-LnrZZUJA.html"
-          width="100%"
-          height="100%"
-          frameborder="0"
-          scrolling="auto"
-          title="Akb48 Team Tp｜《only Today》official Mv"
-          style="position:absolute;"
-          allowfullscreen
-        ></iframe>
-      </div> -->
-      <!-- <div style="position:relative; overflow:hidden; ">
-        <iframe
-          src="https://cdn.jwplayer.com/players/38g3LzJQ-LnrZZUJA.html"
-          width="50%"
-          height="50%"
-          frameborder="0"
-          scrolling="auto"
-          title="Akb48 Team Tp｜《only Today》official Mv"
-          style="position:absolute;"
-          allowfullscreen
-        ></iframe>
-      </div> -->
-      <div class="frameVDO">
-        <iframe
-          src="https://cdn.jwplayer.com/players/38g3LzJQ-qofscDvY.html?exp=1633465563&sig=b44f1ed5194617465d4c93266bd6f842"
-          frameborder="0"
-          scrolling="auto"
-          allowfullscreen
-          style="position:absolute;"
-        ></iframe>
-      </div>
-      <div style="width:300px;height:300px;">
-        <div id="myElement"></div>
+        <!-- หน้า -->
+        <div class="row">
+          <div class="q-mt-sm q-mx-md">หน้า</div>
+          <div>
+            <q-select
+              dark
+              v-model="page"
+              :options="pageOptions"
+              style="width:100px;"
+              rounded
+              outlined
+              dense
+              @input="changePage()"
+            ></q-select>
+          </div>
+        </div>
       </div>
     </div>
     <!-- Dialog วิธีการอัพโหลด -->
@@ -275,7 +230,9 @@
                 </div>
               </div>
               <div class="col-1" align="center">
-                <span class=" cursor-pointer" @click="delCat(item.mc_id)"
+                <span
+                  class=" cursor-pointer"
+                  @click="delCat(item.mc_id, item.catname)"
                   ><u>ลบ</u></span
                 >
               </div>
@@ -318,7 +275,7 @@
               <div class="q-pt-lg">
                 <q-btn
                   style="width:120px; height:45px;"
-                  class="outlineblue "
+                  class="long "
                   outline
                   label="ยกเลิก"
                   @click="
@@ -369,7 +326,7 @@
               <div class="q-pt-lg">
                 <q-btn
                   style="width:120px; height:45px;"
-                  class="outlineblue "
+                  class="long "
                   outline
                   label="ยกเลิก"
                   @click="
@@ -391,6 +348,287 @@
         </div>
       </q-card>
     </q-dialog>
+    <!-- bg สีเข้ม -->
+    <div
+      class="fullscreen bg-backdrop"
+      v-show="
+        dialogHowToUpload ||
+          dialogCategory ||
+          dialogAddCategory ||
+          dialogEditCategory
+      "
+    ></div>
+    <!-- Dialog confirm delete หมวดหนัง -->
+    <q-dialog
+      v-model="dialogConfirmDel"
+      persistent
+      transition-show="scale"
+      transition-hide="scale"
+    >
+      <div class="bgdialog">
+        <div class="bginside font18">
+          ลบหมวดหนัง
+        </div>
+        <div class="bginside2 font18">
+          <div class="q-pt-lg">
+            <img src="../../public/images/exclaim.png" alt="" />
+          </div>
+          <div>
+            คุณต้องการลบหมวดหนัง <i>{{ deleteCat.catName }}</i> ?
+          </div>
+          <div class="row q-pl-md justify-between">
+            <div class="q-pt-lg">
+              <q-btn
+                class="outlineblue font18"
+                outline
+                label="ยกเลิก"
+                @click="delGroupCancelBtn()"
+              />
+            </div>
+            <div class="q-pt-lg q-pr-md">
+              <q-btn
+                class="bluebtnmd font18"
+                label="ตกลง"
+                @click="delCatConfirm()"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </q-dialog>
+    <!-- เพิ่มวีดีโด step1-->
+    <q-dialog v-model="addVdo.dialog">
+      <q-card
+        style="max-width: 1000px;width:800px;height:565px;"
+        class="bgdialogbig"
+      >
+        <div class="bginsidebig font24 " style="line-height:100px;">
+          <div align="center">เพิ่มวีดีโอ</div>
+        </div>
+        <div class="bginsidebig2 font14" style="height:450px;">
+          <div
+            align="left"
+            class="q-pa-md inputLine"
+            style="height:450px; overflow:auto;"
+          >
+            <div class="row justify-center ">
+              <div class="col-2 q-pt-md">ชื่อเรื่อง</div>
+              <div class="col-8">
+                <q-input v-model="addVdo.title" dense dark />
+              </div>
+            </div>
+            <div class="row justify-center">
+              <div class="col-2 q-pt-md">หมวดหมู่</div>
+              <div class="col-8">
+                <q-select
+                  v-model="addVdo.catId"
+                  :options="catOption"
+                  dark
+                  dense
+                  style="width:250px"
+                  emit-value
+                  map-options
+                />
+              </div>
+            </div>
+            <div class="row justify-center">
+              <div class="col-2 q-pt-md">รหัสลิงค์ JW</div>
+              <div class="col-8">
+                <q-input
+                  v-model="addVdo.jwCode"
+                  dense
+                  dark
+                  style="width:250px"
+                />
+              </div>
+            </div>
+            <div class="row justify-center">
+              <div class="col-2 q-pt-md">ความยาว</div>
+              <div class="col-8 row">
+                <q-input
+                  v-model.number="addVdo.durationHour"
+                  dense
+                  dark
+                  style="width:50px"
+                  type="number"
+                />
+                <div class="q-pt-md q-px-sm">ชั่วโมง</div>
+                <q-input
+                  v-model.number="addVdo.durationMin"
+                  dense
+                  dark
+                  style="width:50px"
+                  type="number"
+                />
+                <div class="q-pt-md q-px-sm">นาที</div>
+              </div>
+            </div>
+            <div class="row justify-center" style="line-height:25px;">
+              <div class="col-2 q-pt-md">ภาพหน้าปก</div>
+              <div class="col-8 ">
+                <div>
+                  <q-file
+                    v-model="addVdo.posterFile"
+                    dense
+                    dark
+                    accept=".jpg"
+                    label="เลือกไฟล์ jpg"
+                  >
+                  </q-file>
+                  <div class="font12" style="line-height:15px;">
+                    Image size: 300 x 170 px
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-center">
+              <div class="col-2 q-pt-md">ป้ายกำกับ</div>
+              <div class="col-8">
+                <q-input v-model="addVdo.tag" dense dark />
+              </div>
+            </div>
+            <div
+              class="row q-pl-md justify-between"
+              style="width:400px;margin:auto;"
+            >
+              <div class="q-pt-md">
+                <q-btn
+                  class="outlinebluelong font16"
+                  outline
+                  label="ยกเลิก"
+                  @click="addVdo.dialog = false"
+                />
+              </div>
+              <div class="q-pt-md q-pr-md">
+                <q-btn
+                  class="bluebtnmdlong font16"
+                  label="วิเคราะห์ป้ายกำกับ"
+                  @click="analyticTagBtn()"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+    </q-dialog>
+    <!-- เพิ่มวีดีโด step2-->
+    <q-dialog v-model="addVdo.dialogStep2">
+      <q-card
+        style="max-width: 1000px;width:800px;height:565px;"
+        class="bgdialogbig"
+      >
+        <div class="bginsidebig font24 " style="line-height:100px;">
+          <div align="center">เพิ่มวีดีโอ</div>
+        </div>
+        <div class="bginsidebig2 font14" style="height:450px;">
+          <div
+            align="left"
+            class="q-pa-md inputLine"
+            style="height:450px; overflow:auto;"
+          >
+            <div class="row justify-center ">
+              <div class="col-2 q-pt-md">ชื่อเรื่อง</div>
+              <div class="col-8">
+                <q-input v-model="addVdo.title" dense dark readonly />
+              </div>
+            </div>
+            <div class="row justify-center">
+              <div class="col-2 q-pt-md">หมวดหมู่</div>
+              <div class="col-8">
+                <q-select
+                  v-model="addVdo.catId"
+                  :options="catOption"
+                  dark
+                  dense
+                  style="width:250px"
+                  emit-value
+                  map-options
+                />
+              </div>
+            </div>
+            <div class="row justify-center">
+              <div class="col-2 q-pt-md">รหัสลิงค์ JW</div>
+              <div class="col-8">
+                <q-input
+                  v-model="addVdo.jwCode"
+                  dense
+                  dark
+                  style="width:250px"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row justify-center">
+              <div class="col-2 q-pt-md">ความยาว</div>
+              <div class="col-8 row">
+                <q-input
+                  v-model.number="addVdo.durationHour"
+                  dense
+                  dark
+                  style="width:50px"
+                  type="number"
+                  readonly=""
+                />
+                <div class="q-pt-md q-px-sm">ชั่วโมง</div>
+                <q-input
+                  v-model.number="addVdo.durationMin"
+                  dense
+                  dark
+                  style="width:50px"
+                  type="number"
+                  readonly=""
+                />
+                <div class="q-pt-md q-px-sm">นาที</div>
+              </div>
+            </div>
+            <div class="row justify-center" style="line-height:25px;">
+              <div class="col-2 q-pt-md">ภาพหน้าปก</div>
+              <div class="col-8 ">
+                <div>
+                  <q-file
+                    v-model="addVdo.posterFile"
+                    dense
+                    dark
+                    accept=".jpg"
+                    label="เลือกไฟล์ jpg"
+                  >
+                  </q-file>
+                  <div class="font12" style="line-height:15px;">
+                    Image size: 300 x 170 px
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-center">
+              <div class="col-2 q-pt-md">ป้ายกำกับ</div>
+              <div class="col-8">
+                <q-input v-model="addVdo.tag" dense dark />
+              </div>
+            </div>
+            <div
+              class="row q-pl-md justify-between"
+              style="width:400px;margin:auto;"
+            >
+              <div class="q-pt-md">
+                <q-btn
+                  class="outlinebluelong font16"
+                  outline
+                  label="แก้ไข"
+                  @click="addVdoEditInStep2()"
+                />
+              </div>
+              <div class="q-pt-md q-pr-md">
+                <q-btn
+                  class="bluebtnmdlong font16"
+                  label="วิเคราะห์ป้ายกำกับ"
+                  @click="analyticTagBtn()"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -401,68 +639,58 @@ export default {
     return {
       catSelected: "", //หมวดที่เลือก
       catOption: [], //ตัวเลือกหมวด
+      sortOrder: "ยอดวิวรวม", //เรียงลำดับ
+      options: ["ยอดวิวรวม", "ยอดวิวต่อสัปดาห์", "ลำดับการอัพโหลด"], //ตัวเลือกในการเรียงลำดับ
+      page: 1, //หน้า
+      pageMax: 1, //จำนวนหน้าสูงสุด
+      pageOptions: [], //ตัวเลือกของหน้า
       dialogHowToUpload: false, //เปิดหน้าต่างวิธีการ upload
       dialogCategory: false, //เปิดหมวดหนัง
       dialogAddCategory: false, //เปิดเพิ่มหมวดหนัง
       dialogEditCategory: false, //แก้ไขหมวดหนัง
+      dialogConfirmDel: false, //หน้าต่างยืนยันการลบหมวดหนัง
+      deleteCat: {
+        id: "",
+        catname: ""
+      }, //ข้อมูลลบหมวดหมู่
       dataCat: [], //หมวดหมู่ของข้อมูล
       input: {
         catCode: "",
         catName: ""
       }, //เพิ่มหมวดหนัง
       txtsearch: "", //ข้อมูลการค้นหา
-      editCatId: 0 //รหัสสำหรับแก้ไข cat
+      editCatId: 0, //รหัสสำหรับแก้ไข cat
+      //**** เพิ่มวีดีโอ */
+      addVdo: {
+        dialog: false,
+        dialogStep2: false,
+        title: "x1",
+        catId: "",
+        catName: "",
+        jwCode: "x2",
+        durationHour: "",
+        durationMin: 12,
+        posterFile: null,
+        tag: "y1,y2,x1,x2"
+      } //เพิ่มวีดีโอ
     };
   },
   methods: {
-    searchData() {
-      //ค้นหาข้อมูล
-    },
-    resetSearch() {
-      //ยกเลิกการค้นหา
-      this.txtsearch = "";
-    },
-    openTagSystem() {
-      //เปิดหน้าต่าง tag
-      console.log("open tag system");
-    },
-    openNewMovie() {
-      //เปิดหน้าต่างเพิ่มวีดีโอ
-      console.log("open vdo tab");
-    },
+    //*****  หมวดหมู่หนัง *********/
+    //เปิดหน้าต่างหมวดหนัง
     async opencategory() {
-      //เปิดหน้าต่างหมวดหนัง
       this.loadcat();
       this.dialogCategory = true;
     },
-    async loadcat() {
-      this.dataCat = [];
-      let url = this.serverpath + "bo_movie_type_list.php";
-      let res = await axios.get(url);
-      for (let i = 0; i < res.data.length; i++) {
-        this.dataCat.push(res.data[i]);
-      }
-      this.dataCat.sort((a, b) => a.orderid - b.orderid);
-      this.catOption = [];
-      this.dataCat.forEach(x => {
-        let temp = {
-          value: x.mc_id,
-          label: x.catname
-        };
-        this.catOption.push(temp);
-      });
-      this.catSelected = this.catOption[0].value;
-    },
+    //ปุ่มเพิ่มหมวดหนัง
     addNewCategoryStep2() {
-      //เพิ่มหมวดหนัง
       this.dialogCategory = false;
       this.input.catCode = "";
       this.input.catName = "";
-
       this.dialogAddCategory = true;
     },
+    //บันทึกเพิ่มหมวดหนัง
     async addNewCatBtn() {
-      //บันทึกเพิ่มหมวดหนัง
       //Check ว่ามีการใส่ค่าถูกต้องหรือไหม
       if (this.input.catCode.length > 0 && this.input.catName.length > 0) {
         let data = {
@@ -483,8 +711,8 @@ export default {
         this.redNotify("กรุณาใส่ข้อมูลให้ครบถ้วน");
       }
     },
+    //ปุ่ม offline หมวดหนัง
     async offlineBtn(id) {
-      //ปุ่ม offline หมวดหนัง
       let data = {
         status: 1,
         id: id
@@ -493,8 +721,8 @@ export default {
       let res = await axios.post(url, JSON.stringify(data));
       this.loadcat();
     },
+    //ปุ่ม online หมวดหนัง
     async onlineBtn(id) {
-      //ปุ่ม online หมวดหนัง
       let data = {
         status: 0,
         id: id
@@ -503,26 +731,16 @@ export default {
       let res = await axios.post(url, JSON.stringify(data));
       this.loadcat();
     },
-    async delCat(id) {
-      //ปุ่มลบหมวดหนัง
-      let data = {
-        id: id
-      };
-      let url = this.serverpath + "bo_movie_cat_del.php";
-      let res = await axios.post(url, JSON.stringify(data));
-      this.greenNotify("ลบข้อมูลเสร็จสิ้น");
-      this.loadcat();
-    },
+    //โหลดหน้าแก้ไข cat
     editCat(item) {
-      //โหลดหน้าแก้ไข cat
       this.input.catCode = item.orderid;
       this.input.catName = item.catname;
       this.dialogCategory = false;
       this.editCatId = item.mc_id;
       this.dialogEditCategory = true;
     },
+    //ปุ่มแก้ไขหมวดหนัง
     async editCatBtn() {
-      //ปุ่มแก้ไขหมวดหนัง
       let data = {
         orderid: this.input.catCode,
         catName: this.input.catName,
@@ -533,21 +751,101 @@ export default {
       this.loadcat();
       this.dialogEditCategory = false;
       this.dialogCategory = true;
+    },
+    //*********** จบหมวดหนัง ******/
+
+    //*********** หมวดหนัง  *******/
+    //ปุ่มยกเลิกการลบ
+    delGroupCancelBtn() {
+      this.dialogConfirmDel = false;
+      this.dialogCategory = true;
+    },
+    //ปุ่มลบหมวดหนัง
+    delCat(id, catname) {
+      this.dialogCategory = false;
+      this.dialogConfirmDel = true;
+      this.deleteCat.id = id;
+      this.deleteCat.catName = catname;
+    },
+    //ปุ่ม ok ยืนยันการลบหมวดหนัง
+    async delCatConfirm() {
+      let id = this.deleteCat.id;
+      let data = {
+        id: id
+      };
+      let url = this.serverpath + "bo_movie_cat_del.php";
+      let res = await axios.post(url, JSON.stringify(data));
+      this.greenNotify("ลบข้อมูลเสร็จสิ้น");
+      this.dialogConfirmDel = false;
+      this.loadcat();
+      this.dialogCategory = true;
+    },
+    //โหลด cat เมื่อมีการupdate
+    async loadcat() {
+      this.dataCat = [];
+      let url = this.serverpath + "bo_movie_type_list.php";
+      let res = await axios.get(url);
+      for (let i = 0; i < res.data.length; i++) {
+        this.dataCat.push(res.data[i]);
+      }
+      this.dataCat.sort((a, b) => a.orderid - b.orderid);
+      this.catOption = [];
+      this.dataCat.forEach(x => {
+        let temp = {
+          value: x.mc_id,
+          label: x.catname
+        };
+        this.catOption.push(temp);
+      });
+      this.catSelected = this.catOption[0].value;
+    },
+    //******* จบหมวดหนัง ******* */
+    searchData() {
+      //ค้นหาข้อมูล
+    },
+    resetSearch() {
+      //ยกเลิกการค้นหา
+      this.txtsearch = "";
+    },
+    //เปิดหน้าต่างเพิ่มวีดีโอ
+    openNewMovie() {
+      this.addVdo.dialog = true;
+      this.addVdo.catId = this.catOption[0].value;
+    },
+    //ปุ่มวิเคราะห์ป้ายกำกับ
+    async analyticTagBtn() {
+      //check input
+      if (
+        !(
+          this.addVdo.title.length > 0 &&
+          this.addVdo.jwCode.length > 0 &&
+          (this.addVdo.durationHour > 0 || this.addVdo.durationMin > 0) &&
+          this.addVdo.tag.length > 0
+        )
+      ) {
+        this.redNotify("กรุณากรอกข้อมูลให้ครบถ้วน");
+        return;
+      }
+      this.addVdo.catName = this.catOption.filter(
+        x => x.value == this.addVdo.catId
+      )[0].label;
+      console.log(this.addVdo);
+      this.addVdo.dialogStep2 = true;
+      this.addVdo.dialog = false;
+
+      // //วิเคราะห์ป้ายกำกับ
+      // let url = this.serverpath + "bo_movie_analytic_tag.php";
+      // let res = await axios.post(url, JSON.stringify(this.addVdo));
+      // console.log(res.data);
+    },
+    //ปุ่มแก้ไขในหน้าเพิ่มวีดีโอ
+    addVdoEditInStep2() {
+      this.addVdo.dialogStep2 = false;
+      this.addVdo.dialog = true;
     }
   },
   mounted() {
     this.loadcat();
-    jwplayer("myElement").setup({
-      playlist: [
-        {
-          file: "https://cdn.jwplayer.com/manifests/ieh8jaRp.m3u8",
-          image: "https://yaksaconcept.com/gofuxapi/picture/p001/00.jpg",
-          responsive: true,
-          width: "100%",
-          aspectratio: "16:9"
-        }
-      ]
-    });
   }
 };
 </script>
@@ -586,5 +884,8 @@ export default {
   right: 0;
   width: 100%;
   height: 100%;
+}
+.inputLine {
+  line-height: 40px;
 }
 </style>

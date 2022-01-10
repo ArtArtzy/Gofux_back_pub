@@ -60,7 +60,7 @@ export default {
           this.serverpath +
           "picture/" +
           this.data["pt_folder"] +
-          "/00.jpg?x=" +
+          "/0000.jpg?x=" +
           Math.floor(Math.random() * 999) +
           100;
         this.title = this.data["pt_title"];
@@ -105,7 +105,7 @@ export default {
         this.serverpath +
         "picture/" +
         newData["pt_folder"] +
-        "/00.jpg?x=" +
+        "/0000.jpg?x=" +
         Math.floor(Math.random() * 999) +
         100;
       this.viewPerWeek = newData["statweek"];
