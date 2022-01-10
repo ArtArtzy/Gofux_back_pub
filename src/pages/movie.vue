@@ -62,7 +62,6 @@
               rounded
               outlined
               dense
-              dark
               emit-value
               map-options
             ></q-select>
@@ -105,7 +104,7 @@
     <!-- Dialog วิธีการอัพโหลด -->
     <q-dialog v-model="dialogHowToUpload" persistent>
       <q-card
-        style="max-width: 1000px;width:800px;height:450px;"
+        style="max-width: 1000px;width:800px;height:100vh;"
         class="bgdialogbig"
       >
         <div class="bginsidebig font24 " style="line-height:100px;">
@@ -120,11 +119,11 @@
             </div>
           </div>
         </div>
-        <div class="bginsidebig2 font14" style="height:335px;">
+        <div class="bginsidebig2 font14" style="height: calc(100vh - 163px);">
           <div
             align="left"
             class="q-pa-md"
-            style="height:335px; overflow:auto;"
+            style="height:calc(100vh - 163px); overflow:auto;"
           >
             <div class="font20">การติดตั้งโปรแกรมเพื่อทำการอัพโหลดข้อมูล</div>
             <div>
@@ -487,6 +486,7 @@
                 <q-input v-model="addVdo.tag" dense dark />
               </div>
             </div>
+
             <div
               class="row q-pl-md justify-between"
               style="width:400px;margin:auto;"
@@ -502,126 +502,8 @@
               <div class="q-pt-md q-pr-md">
                 <q-btn
                   class="bluebtnmdlong font16"
-                  label="วิเคราะห์ป้ายกำกับ"
-                  @click="analyticTagBtn()"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-    </q-dialog>
-    <!-- เพิ่มวีดีโด step2-->
-    <q-dialog v-model="addVdo.dialogStep2">
-      <q-card
-        style="max-width: 1000px;width:800px;height:565px;"
-        class="bgdialogbig"
-      >
-        <div class="bginsidebig font24 " style="line-height:100px;">
-          <div align="center">เพิ่มวีดีโอ</div>
-        </div>
-        <div class="bginsidebig2 font14" style="height:450px;">
-          <div
-            align="left"
-            class="q-pa-md inputLine"
-            style="height:450px; overflow:auto;"
-          >
-            <div class="row justify-center ">
-              <div class="col-2 q-pt-md">ชื่อเรื่อง</div>
-              <div class="col-8">
-                <q-input v-model="addVdo.title" dense dark readonly />
-              </div>
-            </div>
-            <div class="row justify-center">
-              <div class="col-2 q-pt-md">หมวดหมู่</div>
-              <div class="col-8">
-                <q-select
-                  v-model="addVdo.catId"
-                  :options="catOption"
-                  dark
-                  dense
-                  style="width:250px"
-                  emit-value
-                  map-options
-                />
-              </div>
-            </div>
-            <div class="row justify-center">
-              <div class="col-2 q-pt-md">รหัสลิงค์ JW</div>
-              <div class="col-8">
-                <q-input
-                  v-model="addVdo.jwCode"
-                  dense
-                  dark
-                  style="width:250px"
-                  readonly
-                />
-              </div>
-            </div>
-            <div class="row justify-center">
-              <div class="col-2 q-pt-md">ความยาว</div>
-              <div class="col-8 row">
-                <q-input
-                  v-model.number="addVdo.durationHour"
-                  dense
-                  dark
-                  style="width:50px"
-                  type="number"
-                  readonly=""
-                />
-                <div class="q-pt-md q-px-sm">ชั่วโมง</div>
-                <q-input
-                  v-model.number="addVdo.durationMin"
-                  dense
-                  dark
-                  style="width:50px"
-                  type="number"
-                  readonly=""
-                />
-                <div class="q-pt-md q-px-sm">นาที</div>
-              </div>
-            </div>
-            <div class="row justify-center" style="line-height:25px;">
-              <div class="col-2 q-pt-md">ภาพหน้าปก</div>
-              <div class="col-8 ">
-                <div>
-                  <q-file
-                    v-model="addVdo.posterFile"
-                    dense
-                    dark
-                    accept=".jpg"
-                    label="เลือกไฟล์ jpg"
-                  >
-                  </q-file>
-                  <div class="font12" style="line-height:15px;">
-                    Image size: 300 x 170 px
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row justify-center">
-              <div class="col-2 q-pt-md">ป้ายกำกับ</div>
-              <div class="col-8">
-                <q-input v-model="addVdo.tag" dense dark />
-              </div>
-            </div>
-            <div
-              class="row q-pl-md justify-between"
-              style="width:400px;margin:auto;"
-            >
-              <div class="q-pt-md">
-                <q-btn
-                  class="outlinebluelong font16"
-                  outline
-                  label="แก้ไข"
-                  @click="addVdoEditInStep2()"
-                />
-              </div>
-              <div class="q-pt-md q-pr-md">
-                <q-btn
-                  class="bluebtnmdlong font16"
-                  label="วิเคราะห์ป้ายกำกับ"
-                  @click="analyticTagBtn()"
+                  label="บันทึก"
+                  @click="addVdoSaveBtn()"
                 />
               </div>
             </div>
@@ -663,19 +545,22 @@ export default {
       //**** เพิ่มวีดีโอ */
       addVdo: {
         dialog: false,
-        dialogStep2: false,
-        title: "x1",
+
+        title: "",
         catId: "",
-        catName: "",
-        jwCode: "x2",
+        jwCode: "",
         durationHour: "",
-        durationMin: 12,
+        durationMin: "",
         posterFile: null,
-        tag: "y1,y2,x1,x2"
+        tag: ""
       } //เพิ่มวีดีโอ
     };
   },
   methods: {
+    changeOrder() {},
+
+    changePage() {},
+
     //*****  หมวดหมู่หนัง *********/
     //เปิดหน้าต่างหมวดหนัง
     async opencategory() {
@@ -813,35 +698,33 @@ export default {
       this.addVdo.catId = this.catOption[0].value;
     },
     //ปุ่มวิเคราะห์ป้ายกำกับ
-    async analyticTagBtn() {
+    async addVdoSaveBtn() {
       //check input
+
       if (
-        !(
-          this.addVdo.title.length > 0 &&
-          this.addVdo.jwCode.length > 0 &&
-          (this.addVdo.durationHour > 0 || this.addVdo.durationMin > 0) &&
-          this.addVdo.tag.length > 0
-        )
+        this.addVdo.title.length == 0 ||
+        this.addVdo.jwCode.length == 0 ||
+        (this.addVdo.durationHour == 0 && this.addVdo.durationMin == 0) ||
+        this.addVdo.tag.length == 0 ||
+        this.addVdo.posterFile == null
       ) {
         this.redNotify("กรุณากรอกข้อมูลให้ครบถ้วน");
         return;
       }
-      this.addVdo.catName = this.catOption.filter(
-        x => x.value == this.addVdo.catId
-      )[0].label;
-      console.log(this.addVdo);
-      this.addVdo.dialogStep2 = true;
-      this.addVdo.dialog = false;
 
-      // //วิเคราะห์ป้ายกำกับ
-      // let url = this.serverpath + "bo_movie_analytic_tag.php";
-      // let res = await axios.post(url, JSON.stringify(this.addVdo));
-      // console.log(res.data);
-    },
-    //ปุ่มแก้ไขในหน้าเพิ่มวีดีโอ
-    addVdoEditInStep2() {
-      this.addVdo.dialogStep2 = false;
-      this.addVdo.dialog = true;
+      //บันทึกเข้า database
+
+      let url = this.serverpath + "bo_movie_add_movie.php";
+
+      let res = await axios.post(url, JSON.stringify(this.addVdo));
+      this.greenNotify("บันทึกข้อมูลเสร็จสิ้น");
+      this.addVdo.dialog = false;
+      this.addVdo.title = "";
+      this.addVdo.jwCode = "";
+      this.addVdo.durationHour = "";
+      this.addVdo.durationMin = "";
+      this.addVdo.posterFile = null;
+      this.addVdo.tag = "";
     }
   },
   mounted() {
