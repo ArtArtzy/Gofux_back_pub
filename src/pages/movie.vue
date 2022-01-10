@@ -101,6 +101,7 @@
           </div>
         </div>
       </div>
+      <movieblock></movieblock>
     </div>
     <!-- Dialog วิธีการอัพโหลด -->
     <q-dialog v-model="dialogHowToUpload" persistent>
@@ -634,7 +635,10 @@
 
 <script>
 import axios from "axios";
+import movieBlock from "../components/movieblock";
+import movieblock from "src/components/movieblock.vue";
 export default {
+  components: { movieblock },
   data() {
     return {
       catSelected: "", //หมวดที่เลือก
