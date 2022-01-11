@@ -4,6 +4,61 @@
     <div class="contentDiv ">
       <!-- แถวแรก -->
       <div class="row q-pt-md justify-end">
+        <!-- ค้นหาชื่อเรื่อง -->
+        <div class="col">
+          <q-input
+            v-model="txtsearch"
+            dark
+            outlined
+            rounded
+            placeholder="ค้นหาชื่อเรื่อง"
+            dense
+            style="width:250px;"
+            @keyup.enter="searchData"
+          >
+            <template v-if="txtsearch" v-slot:append>
+              <q-icon
+                name="cancel"
+                @click.stop="resetSearch"
+                class="cursor-pointer"
+              />
+            </template>
+          </q-input>
+        </div>
+        <!-- หมวดหมู่ -->
+        <div class="row" style="width:230px">
+          <div class="q-mt-sm q-mx-md">หมวดหมู่</div>
+          <div>
+            <q-select
+              dark
+              v-model="catSelected"
+              :options="catOption"
+              style="width:120px;"
+              rounded
+              outlined
+              dense
+              emit-value
+              map-options
+              @input="changeCat()"
+            ></q-select>
+          </div>
+        </div>
+        <!-- หน้า -->
+        <div class="row">
+          <div class="q-mt-sm q-mx-md ">หน้า</div>
+          <div class="q-pr-md">
+            <q-select
+              dark
+              v-model="page"
+              :options="pageOptions"
+              style="width:100px;"
+              rounded
+              outlined
+              dense
+              @input="changePage()"
+            ></q-select>
+          </div>
+        </div>
         <div class="row">
           <div class="row btncustom" @click="dialogHowToUpload = true">
             <div class="q-px-md">
@@ -28,78 +83,7 @@
         </div>
       </div>
       <!-- แถวสอง -->
-      <div class="row q-pt-md">
-        <!-- ค้นหาชื่อเรื่อง -->
-        <div class="col">
-          <q-input
-            v-model="txtsearch"
-            dark
-            outlined
-            rounded
-            placeholder="ค้นหาชื่อเรื่อง"
-            dense
-            style="width:400px;"
-            @keyup.enter="searchData"
-          >
-            <template v-if="txtsearch" v-slot:append>
-              <q-icon
-                name="cancel"
-                @click.stop="resetSearch"
-                class="cursor-pointer"
-              />
-            </template>
-          </q-input>
-        </div>
-        <!-- หมวดหมู่ -->
-        <div class="row" style="width:350px">
-          <div class="q-mt-sm q-mx-md">หมวดหมู่</div>
-          <div>
-            <q-select
-              dark
-              v-model="catSelected"
-              :options="catOption"
-              style="width:200px;"
-              rounded
-              outlined
-              dense
-              emit-value
-              map-options
-            ></q-select>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="q-mt-sm q-mx-md">เรียง</div>
-          <div>
-            <q-select
-              dark
-              v-model="sortOrder"
-              :options="options"
-              style="width:200px;"
-              rounded
-              outlined
-              dense
-              @input="changeOrder()"
-            ></q-select>
-          </div>
-        </div>
-        <!-- หน้า -->
-        <div class="row">
-          <div class="q-mt-sm q-mx-md">หน้า</div>
-          <div>
-            <q-select
-              dark
-              v-model="page"
-              :options="pageOptions"
-              style="width:100px;"
-              rounded
-              outlined
-              dense
-              @input="changePage()"
-            ></q-select>
-          </div>
-        </div>
-      </div>
       <movieblock></movieblock>
     </div>
     <!-- Dialog วิธีการอัพโหลด -->
@@ -525,8 +509,6 @@ export default {
     return {
       catSelected: "", //หมวดที่เลือก
       catOption: [], //ตัวเลือกหมวด
-      sortOrder: "ยอดวิวรวม", //เรียงลำดับ
-      options: ["ยอดวิวรวม", "ยอดวิวต่อสัปดาห์", "ลำดับการอัพโหลด"], //ตัวเลือกในการเรียงลำดับ
       page: 1, //หน้า
       pageMax: 1, //จำนวนหน้าสูงสุด
       pageOptions: [], //ตัวเลือกของหน้า
@@ -549,7 +531,6 @@ export default {
       //**** เพิ่มวีดีโอ */
       addVdo: {
         dialog: false,
-
         title: "",
         catId: "",
         jwCode: "",
@@ -557,13 +538,54 @@ export default {
         durationMin: "",
         posterFile: null,
         tag: ""
-      } //เพิ่มวีดีโอ
+      }, //เพิ่มวีดีโอ
+      showMovie: []
     };
   },
   methods: {
-    changeOrder() {},
+    async changeCat() {
+      this.page = 1;
+      await this.showTotalPage();
+      this.loadData();
+    },
 
-    changePage() {},
+    changePage() {
+      this.loadData();
+    },
+
+    searchData() {
+      //ค้นหาข้อมูล
+    },
+    resetSearch() {
+      //ยกเลิกการค้นหา
+      this.txtsearch = "";
+    },
+    //โหลดข้อมูลที่แสดงผล
+    async loadData() {
+      let data = {
+        catId: this.catSelected,
+        page: this.page
+      };
+      let url = this.serverpath + "bo_movie_loadmovie.php";
+      let res = await axios.post(url, JSON.stringify(data));
+
+      this.showMovie = res.data;
+    },
+    async showTotalPage() {
+      let data = {
+        catId: this.catSelected
+      };
+      let url = this.serverpath + "bo_movie_totalpage.php";
+      let res = await axios.post(url, JSON.stringify(data));
+
+      let totalData = res.data;
+      this.pageMax = Math.ceil(totalData / 8);
+
+      this.pageOptions = [];
+      for (let i = 1; i <= this.pageMax; i++) {
+        this.pageOptions.push(i);
+      }
+    },
 
     //*****  หมวดหมู่หนัง *********/
     //เปิดหน้าต่างหมวดหนัง
@@ -689,19 +711,15 @@ export default {
       this.catSelected = this.catOption[0].value;
     },
     //******* จบหมวดหนัง ******* */
-    searchData() {
-      //ค้นหาข้อมูล
-    },
-    resetSearch() {
-      //ยกเลิกการค้นหา
-      this.txtsearch = "";
-    },
+
+    //********หน้าเพิ่ม Vdo*******//
+
     //เปิดหน้าต่างเพิ่มวีดีโอ
     openNewMovie() {
       this.addVdo.dialog = true;
       this.addVdo.catId = this.catOption[0].value;
     },
-    //ปุ่มวิเคราะห์ป้ายกำกับ
+    //ปุ่มเพิ่ม Vdo
     async addVdoSaveBtn() {
       //check input
 
@@ -730,9 +748,13 @@ export default {
       this.addVdo.posterFile = null;
       this.addVdo.tag = "";
     }
+
+    //******จบหน้าเพิ่มVdo */
   },
-  mounted() {
-    this.loadcat();
+  async mounted() {
+    await this.loadcat();
+    await this.showTotalPage();
+    this.loadData();
   }
 };
 </script>
